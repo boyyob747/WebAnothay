@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('sinhvien.index');
 });
 Route::get('group', function () {
     return "anothay";
