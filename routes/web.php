@@ -17,3 +17,4 @@ Route::get('/about', 'PagesController@about');
 Auth::routes();
 
 Route::get('/home', 'PagesController@index')->name('home');
+Route::resource('/home/teacher','TeachersController');
