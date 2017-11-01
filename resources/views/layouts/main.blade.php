@@ -25,7 +25,31 @@
             {
               echo $about;
             } ?>><a href="{{ action('PagesController@about')}}">About</a></li>
-            <li><a href="{{ action('PagesController@index')}}">Login</a></li>
+            <ul class="nav navbar-nav navbar-right">
+              @guest
+                  <li><a href="{{ action('PagesController@index')}}">Login</a></li>
+              @else
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
+                      {{ Auth::user()->name }} <span class="caret"></span>
+                  </a>
+
+                  <ul class="dropdown-menu">
+                      <li>
+                          <a href="{{ route('logout') }}"
+                              onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                              Logout
+                          </a>
+
+                          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              {{ csrf_field() }}
+                          </form>
+                      </li>
+                  </ul>
+              </li>
+              @endguest
+            </ul>
 					</ul>
 				</div>
 			</div>
