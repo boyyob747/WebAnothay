@@ -3,6 +3,7 @@
         <title>App Name - @yield('title')</title>
         {!! Html::style('bootstrap/css/bootstrap.min.css') !!}
           {!! Html::style('css/custom.css') !!}
+          {!! Html::script('js/jquery.min.js') !!}
     </head>
     <body>
       <div class="navbar navbar-inverse">
@@ -15,9 +16,16 @@
 				</button>
 				<div class="collapse navbar-collapse navHeader">
 					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="HomePage.php" target="_main">Home</a></li>
-						<li><a href="About.php" target="_main">About</a></li>
-            <li><a href="About.php" target="_main">Login</a></li>
+						<li <?php if(isset($home))
+            {
+              echo $home;
+            } ?>>
+            <a href="{{ action('PagesController@index')}}">Home</a></li>
+						<li <?php if(isset($about))
+            {
+              echo $about;
+            } ?>><a href="{{ action('PagesController@about')}}">About</a></li>
+            <li><a href="{{ action('PagesController@index')}}">Login</a></li>
 					</ul>
 				</div>
 			</div>
@@ -34,7 +42,9 @@
          <!-- : 1.Khanh Minh 2.Hoàng Đình 3.Quý Định Lê 3.Dung Phương 5.Anothay Alounsavanh-2017 -->
 			</div>
 		</footer>
-        {!! Html::script('js/jquery.min.js') !!}
+
+    {!! Html::script('js/customScript.js') !!}
+
           {!! Html::script('bootstrap/js/bootstrap.min.js') !!}
     </body>
 </html>

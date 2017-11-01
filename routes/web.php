@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('sinhvien.index');
-});
-Route::get('group', function () {
-    return "anothay";
-});
+Route::get('/', 'PagesController@index');
+Route::get('/about', 'PagesController@about');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
