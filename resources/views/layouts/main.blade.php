@@ -7,7 +7,7 @@
   {!! Html::script('js/custom.js') !!}
   {!! Html::style('awesome/css/font-awesome.min.css') !!}
 </head>
-<body>
+<body style="height: 1400px;">
   <div class="navbar navbar-inverse">
     <div class="container">
       <a class="navbar-brand" href="#">TEST ONLINE</a>
@@ -96,11 +96,10 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <div>
-    @yield('content')
+  <div class="container-fluid col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0" >
+  @yield('content')
   </div>
-</div>
+
 
 <footer class="navbar navbar-inverse navbar-fixed-bottom">
   <div class="container">

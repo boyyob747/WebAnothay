@@ -48,6 +48,7 @@ class TeachersController extends Controller
      */
     public function store(TeacherRequest $request)
     {
+
         $teacher = new Teacher();
         $teacher->ngaysinh = $request['ngaysinh'];
         $teacher->sodienthoai = $request['sodienthoai'];
@@ -67,7 +68,7 @@ class TeachersController extends Controller
     public function show($id)
     {
        // $teachers = Teacher::all()->take(2)->get();
-        $teachers = Teacher::orderBy('id', 'desc')->take(10)->get();
+        $teachers = Teacher::orderBy('id', 'desc')->take(7)->get();
         $data['giaovien'] = 'class="active"';
         return view('teachers.teacher', compact('teachers'),$data);
     }
@@ -80,8 +81,15 @@ class TeachersController extends Controller
      */
     public function edit($id)
     {
-        $teach = Teacher::find($id);
-
+      $users = array();
+      $data['giaovien'] = 'class="active"';
+      $teachers = DB::table('teachers')->Paginate(10);
+      foreach ($teachers as $teacher)
+      {
+          $users[] =  User::find($teacher->user_id);
+      }
+      $teacherforedit = Teacher::find($id);
+      return view('teachers.teacher', ['teachers' => $teachers,'users' => $users , 'teacherforedit' => $teacherforedit],$data);
     }
 
     /**
@@ -93,12 +101,20 @@ class TeachersController extends Controller
      */
     public function update(Request $request, $id)
     {
-      // $teacher = new Teacher();
-      // $teacher-> = $request['ngaysinh'];
-      // $teacher-> = $request['truong'];
-      // $teacher-> = $request['khoa'];
-      // $teacher-> = $request['sodienthoai'];
-      // $teacher->save();
+        $teacherforedit = Teacher::find($id);
+        $userforeidt = User::find($request['user_id']);
+        $teacherforedit->ngaysinh = $request['ngaysinh'];
+        $teacherforedit->sodienthoai = $request['sodienthoai'];
+        $teacherforedit->truong = $request['truong'];
+        $teacherforedit->khoa = $request['khoa'];
+        $userforeidt->name = $request['name'];
+        if ( $teacherforedit->save() &&  $userforeidt->save())
+        {
+          return redirect('home/teacher')->with('success','Đã sửa thành công');
+        }
+        else {
+            return redirect('home/teacher')->with('error','Không thể sửa dữ liệu được hãy kiểm trả lại');
+        }
     }
 
     /**
@@ -109,7 +125,8 @@ class TeachersController extends Controller
      */
     public function destroy($id)
     {
-          $teacher = Teacher::find($id);
-          $teacher->delete();
+          $user = User::find($id);
+          $user->delete();
+          return redirect('home/teacher');
     }
 }

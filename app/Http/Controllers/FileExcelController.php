@@ -4,23 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use App\Teacher;
+use App\User;
+use Input;
+use DB;
+use Excel;
 class FileExcelController extends Controller
 {
-      public function import(Request $request)
+      public function getImport()
     {
-          $this->validate($request,[
-              'file' => 'required'
-          ]);
-        if(($handle = fopen($_FILES['file']['tmp_name'],'r')) != FALSE)
-        {
-            fgetcsv($handle);
-        }
-        while(($data = fgetcsv($handle,1000,",")) != FALSE)
-        {
-            echo $data[0];
-            echo "<br>";
-        }
-        //return $request;
+      return view('teachers.import_excel');
     }
+    public function postImport()
+    {
+      $data = Excel::load(Input::file('teacher'), function($reader) {})->get();
+       if(!empty($data) && $data->count()){
+           foreach ($data->toArray() as $key => $value) {
+               if(!empty($value)){
+                 $teacher = new Teacher();
+                 $teacher->ngaysinh = $value['ngaysinh'];
+                 $teacher->sodienthoai = $value['sodienthoai'];
+                 $teacher->truong = $value['truong'];
+                 $teacher->khoa = $value['khoa'];
+                 $user = User::create([
+                     'name' => $value['name'],
+                     'state' => '1',
+                     'username' => $value['username'],
+                     'email' =>  $value['email'],
+                     'password' => bcrypt($value['password']),
+                 ]);
+                 $teacher->user_id = $user->id;
+                 $teacher->save();
+               }
+           }
+           return redirect('home/teacher');
+    }
+  }
 }
