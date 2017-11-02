@@ -18,3 +18,4 @@ Auth::routes();
 
 Route::get('/home', 'PagesController@index')->name('home');
 Route::resource('/home/teacher','TeachersController');
+Route::post('import','FileExcelController@import');

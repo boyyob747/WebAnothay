@@ -4,6 +4,7 @@
   {!! Html::style('bootstrap/css/bootstrap.min.css') !!}
   {!! Html::style('css/custom.css') !!}
   {!! Html::script('js/jquery.min.js') !!}
+  {!! Html::script('js/custom.js') !!}
   {!! Html::style('awesome/css/font-awesome.min.css') !!}
 </head>
 <body>
