@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
@@ -7,20 +7,23 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
                                 class="sr-only">Close</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Thêm giáo viên</h4>
-                    @if($errors-> any())
-                        <script>
-                            $(document).ready(function () {
-                                $("button[name=btn_modal]").click();
-                            });
-                        </script>
-                        <ul class="alert alert-danger">
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
+                    <h4 class="modal-title" id="myModalLabel">Thêm giáo viên<?php if(isset($teacherforedit))
+                    echo $teacherforedit->ngaysinh; ?></h4>
+                    <!-- @if($errors-> any())
+                    @if(!isset($backFormUpdate))
+                    <ul class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </ul>
+                    <script>
+                        $(document).ready(function () {
+                            $('#modalEdit').modal('hide')
+                            $('#modalAdd').modal('show')
+                        });
+                    </script>
                     @endif
-
+                    @endif -->
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -83,7 +86,7 @@
                         {!! Form::close() !!}
                         <hr>
                         <br>
-                        <center><p>Hoặc nhập bằng file excel .xls vd: <a href="#">FileViDu.xls</a></p>
+                        <center><p>Hoặc nhập bằng file excel .xls vd: <a href="<?php echo asset('vd_file_giaovien.xls'); ?>">FileViDu.xls</a></p>
                             <br>
                          {!! Form::open(['method' => 'POST', 'url' => 'postImport','id'  => 'form_create_teacher','class' => 'form form-horizontal','enctype'=>'multipart/form-data']) !!}
                             <div class="form-group">
@@ -104,7 +107,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" name="close_form" class="btn btn-default" data-dismiss="modal">Close</button>
 
                     </button>
                 </div>

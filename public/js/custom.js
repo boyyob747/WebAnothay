@@ -3,6 +3,10 @@ function submitForm(action) {
     form.action = action;
     form.submit();
 }
+$(document).ready(function() {
+    $('#table_teachers').DataTable();
+} );
+
 $(document).on('click',function(){
     // $('#datepicker').datetimepicker({
     //     locale: 'it',
@@ -49,3 +53,29 @@ function bs_input_file() {
 $(function() {
     bs_input_file();
 });
+
+function getTeacherFromServer($id){
+  $.ajax({url: "/home/teacher/"+$id+"/edit",type: "get",dataType: "html", success: function(result){
+               $('#include').html(result);
+              $('#modalEdit').modal('show')
+              $('#modalAdd').modal('hide')
+        },  error: function (xhr, status, error) {
+                alert(xhr.responseText);
+            }});
+}
+function editTeacherFromServer($id)
+{
+  $.ajax({url: "/home/teacher/update/"+$id,type: "POST",dataType: "html",data: $("#form_edit_teacher").serialize(), success: function(result){
+        },  error: function (xhr, status, error) {
+          var err = eval("(" + xhr.responseText + ")");
+          var msg = ""
+          var it = ""
+          var data = jQuery.parseJSON(JSON.stringify(err.errors));
+            $.each(data, function(key, item)
+            {
+                it = "<li>"+item+"</\li>"
+                msg = msg + it ;
+              });
+            document.getElementById("divError").innerHTML=msg;
+            }});
+}

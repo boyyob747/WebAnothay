@@ -1,4 +1,4 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
@@ -7,26 +7,11 @@
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
                                 class="sr-only">Close</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Thêm giáo viên</h4>
-                    @if($errors-> any() || isset($teacherforedit))
-                        <script>
-                            $(document).ready(function () {
-                                $("button[name=btn_modal]").click();
-                            });
-                        </script>
-                    @endif
-                    @if(!isset($teacherforedit))
-                        <ul class="alert alert-danger">
-                            @foreach($errors->all() as $error)
-                                <li>{{$error}}</li>
-                            @endforeach
-                        </ul>
-                    @endif
-
+                    <h4 class="modal-title" id="myModalLabel">Sửa giáo viên</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        {!! Form::open(['method' => 'PATCH','action' => ['TeachersController@update',$teacherforedit->id],'id'  => 'form_create_teacher','class' => 'form form-horizontal']) !!}
+                        {!!  Form::open(['action' => ['TeachersController@update',$teacherforedit->id],'method' => 'PATCH','id'  => 'form_edit_teacher','class' => 'form form-horizontal','onsubmit' => '']) !!}
                         <div class="input-group input-group-lg">
                                 <span class="input-group-addon" id="sizing-addon1"><i
                                             class="fa fa-user fa-1x"></i></span>
@@ -74,6 +59,7 @@
                         </div>
                         <br>
                         <div class="text-right">
+                          <!-- <button class="btn btn-danger" onclick="editTeacherFromServer({{$teacherforedit->id}})">Go</button> -->
                                 {!! Form::submit($submitButtonText,['class' => 'btn btn-primary']) !!}
                         </div>
 
@@ -81,8 +67,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                        <a href="javascript:history.go(-1)" class="btn btn-danger">Back</a>
-                    </button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </button>
                 </div>
             <!-- </div> -->
         </div>

@@ -7,6 +7,16 @@ php.blade file : {{ $valiable }}<br>
 mainlayout<br>
 @yield(‘page_title’)<br>
 @yield(‘content’)<br>
+
+//fix .env show to public
+# Disable index view
+Options -Indexes
+
+# Hide a specific file
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>
 index.php<br>
 @extens(‘layout.main’)<br>
 @section(‘page_title’,’hello page’)<br>
@@ -37,3 +47,19 @@ for Loop :<br>
 @while(true)  <br>
 i am looping forever<br>
 @endwhile<br>
+//ubuntu
+sudo chmod -R 777 ./storage ./bootstrap
+sudo composer update
+set password for databse in file .env
+//fix if cant fount route ubuntu
+https://www.youtube.com/watch?v=7CatEn5IAlo
+
+//fix .env show to public
+# Disable index view
+Options -Indexes
+
+# Hide a specific file
+<Files .env>
+    Order allow,deny
+    Deny from all
+</Files>

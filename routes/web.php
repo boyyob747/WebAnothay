@@ -19,5 +19,10 @@ Auth::routes();
 Route::get('/home', 'PagesController@index')->name('home');
 Route::resource('/home/teacher','TeachersController');
 // Route::post('import','FileExcelController@import');
-Route::get('/import','FileExcelController@getImport');
+Route::get('/import','FileExcelController@getImport');//getExportTeachers
+Route::get('/exportteachers','FileExcelController@getExportTeachers');
 Route::post('/postImport','FileExcelController@postImport');
+//deleteAll
+Route::get('/deleteAll/{state}','TeachersController@deleteAll');
+//updateAjax
+// Route::post('/home/updateteacher/{id}','TeachersController@updateAjax');

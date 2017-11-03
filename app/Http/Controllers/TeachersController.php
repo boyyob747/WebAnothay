@@ -9,7 +9,7 @@ use App\Teacher;
 use App\User;
 use App\Http\Requests\TeacherRequest;
 use PhpParser\Node\Expr\Array_;
-
+use Auth;
 class TeachersController extends Controller
 {
     /**
@@ -21,12 +21,13 @@ class TeachersController extends Controller
     {
         $users = array();
         $data['giaovien'] = 'class="active"';
-        $teachers = DB::table('teachers')->Paginate(10);
-        foreach ($teachers as $teacher)
-        {
-            $users[] =  User::find($teacher->user_id);
-        }
-        return view('teachers.teacher', ['teachers' => $teachers,'users' => $users],$data);
+        // $teachers = DB::table('teachers')->get();
+        // foreach ($teachers as $teacher)
+        // {
+        //     $users[] =  User::find($teacher->user_id);
+        // }
+        $teachers = Teacher::all();
+        return view('teachers.teacher', ['teachers' => $teachers],$data);
     }
 
     /**
@@ -81,15 +82,8 @@ class TeachersController extends Controller
      */
     public function edit($id)
     {
-      $users = array();
-      $data['giaovien'] = 'class="active"';
-      $teachers = DB::table('teachers')->Paginate(10);
-      foreach ($teachers as $teacher)
-      {
-          $users[] =  User::find($teacher->user_id);
-      }
       $teacherforedit = Teacher::find($id);
-      return view('teachers.teacher', ['teachers' => $teachers,'users' => $users , 'teacherforedit' => $teacherforedit],$data);
+      return view('teachers.modal_edit_teacher',['teacherforedit' => $teacherforedit,'submitButtonText' => 'Save']);
     }
 
     /**
@@ -101,6 +95,11 @@ class TeachersController extends Controller
      */
     public function update(Request $request, $id)
     {
+      $this->validate($request, array (
+        'name' => 'required|string|max:255',
+        'ngaysinh' => 'date_format:"Y-m-d"|required',
+        'sodienthoai' => 'required|numeric',
+    ));
         $teacherforedit = Teacher::find($id);
         $userforeidt = User::find($request['user_id']);
         $teacherforedit->ngaysinh = $request['ngaysinh'];
@@ -110,13 +109,12 @@ class TeachersController extends Controller
         $userforeidt->name = $request['name'];
         if ( $teacherforedit->save() &&  $userforeidt->save())
         {
-          return redirect('home/teacher')->with('success','Đã sửa thành công');
+          return back()->with('success','Đã sửa thành công');
         }
         else {
-            return redirect('home/teacher')->with('error','Không thể sửa dữ liệu được hãy kiểm trả lại');
+         return back()->with('error','Không thể sửa dữ liệu được hãy kiểm trả lại');
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -126,7 +124,28 @@ class TeachersController extends Controller
     public function destroy($id)
     {
           $user = User::find($id);
-          $user->delete();
-          return redirect('home/teacher');
+          if ( $user->delete())
+          {
+            return back()->with('success','Đã xóa thành công');
+          }
+    }
+    public function deleteAll($state)
+    {
+          $currentState = Auth::user()->state;
+          if ($currentState != 3)
+          {
+            return abort(404);
+          }
+          else
+          {
+            $users = User::all();
+            foreach ($users as $user) {
+              if ($user->state == $state)
+              {
+                $user->delete();
+              }
+            }
+            return back()->with('success','Đã xáo tất cả thánh công');
+          }
     }
 }

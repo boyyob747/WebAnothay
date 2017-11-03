@@ -1,10 +1,14 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <html>
 <head>
   <title>@yield('title')</title>
   {!! Html::style('bootstrap/css/bootstrap.min.css') !!}
   {!! Html::style('css/custom.css') !!}
+  {!! Html::style('css/dataTables.bootstrap.min.css') !!}
   {!! Html::script('js/jquery.min.js') !!}
   {!! Html::script('js/custom.js') !!}
+  {!! Html::script('js/jquery.dataTables.min.js') !!}
+  {!! Html::script('js/dataTables.bootstrap.min.js') !!}
   {!! Html::style('awesome/css/font-awesome.min.css') !!}
 </head>
 <body style="height: 1400px;">
@@ -96,7 +100,7 @@
     </div>
   </div>
 </div>
-  <div class="container-fluid col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0" >
+  <div class="container-fluid col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0">
   @yield('content')
   </div>
 

@@ -5,10 +5,10 @@
               rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
           @include('teachers.table_teacher')
-
-          @if(isset($teacherforedit))
+          <!-- @if(isset($teacherforedit))
           @include('teachers.modal_edit_teacher',['submitButtonText' => 'Save'])
-          @else
+          {{$teacherforedit}}
+          @endif -->
           @include('teachers.modal_form_teacher',['submitButtonText' => 'Thêm giáo viên'])
-          @endif
+          <div id="include"></div>
     @stop
