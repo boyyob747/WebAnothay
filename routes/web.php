@@ -24,5 +24,5 @@ Route::get('/exportteachers','FileExcelController@getExportTeachers');
 Route::post('/postImport','FileExcelController@postImport');
 //deleteAll
 Route::get('/deleteAll/{state}','TeachersController@deleteAll');
+Route::get('/deleteteacher/{id}','TeachersController@deleteTeacher');
 //updateAjax
-// Route::post('/home/updateteacher/{id}','TeachersController@updateAjax');

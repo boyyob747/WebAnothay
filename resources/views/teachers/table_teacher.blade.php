@@ -2,7 +2,7 @@
   <!-- style="min-height: 70%;
   height: 90%;" -->
 <div class="panel-heading text-left panel-relative"><h2>Dánh sách giáo viên</h2>
-  <button class="btn btn-success" name="btn_modal" data-toggle="modal" data-target="#modalAdd"><i class="fa fa-plus" aria-hidden="true"></i></button>
+  <button class="btn btn-success" name="btn_modal" id="btn_add"><i class="fa fa-plus" aria-hidden="true"></i></button>
   <div class="btn-group">
   <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <i class="fa fa-bars" aria-hidden="true"></i> <span class="caret"></span>
@@ -16,6 +16,9 @@
 </div>
 
 <div class="panel-body ">
+  <div id="showsuccesbyself">
+
+  </div>
   @if ($message = Session::get('usernameInsertError'))
   <div class="alert alert-danger alert-dismissable fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -55,26 +58,11 @@
       </thead>
       <tbody>
         <?php $row = 0;
-        if (isset($_GET['page']))
-        {
-          $page = $_GET['page'];
-          $page = $page * 10;
-        }
-        else {
-          $page = 10;
-        }
         ?>
         @foreach($teachers as $teacher)
         <?php $row = $row + 1; ?>
-        <tr>
-          <th scope="row"><?php if ($page > 10)
-          {
-            echo $page-10 + $row;
-          }
-          else {
-            echo $row;
-          }
-          ?></th>
+        <tr class="item{{$teacher->id}}">
+          <th scope="row"> {{$row}}</th>
           <td>{{$teacher->user->name}}</td>
           <td>{{$teacher->user->username}}</td>
           <td>{{$teacher->user->email}}</td>
@@ -82,11 +70,15 @@
           <td>{{$teacher->truong}}</td>
           <td>{{$teacher->khoa}}</td>
           <td>{{$teacher->sodienthoai}}</td>
-          <td><button class="btn btn-success" onclick="getTeacherFromServer({{$teacher->id}})">Edit</button</td>
-            <td>{!! Form::open(['url' => '/home/teacher/'.$teacher->user->id, 'method' => 'delete' , 'onsubmit' => 'return confirm("Bạn có thực sự muốn xóa không?")']) !!}
-              {!! Form::submit('Xóa', ['class' => 'btn btn-danger']) !!}
-              {!! Form::close() !!}</td>
-            </tr>
+          <!-- <td><button class="btn btn-success" onclick="getTeacherFromServer({{$teacher->id}})">Edit</button</td> -->
+          <td><button class="edit-modal btn btn-info"
+            data-info="{{$teacher->id}},{{$teacher->user->name}},{{$teacher->user->username}},{{$teacher->user->email}},{{$teacher->ngaysinh}},{{$teacher->truong}},{{$teacher->khoa}},{{$teacher->sodienthoai}},{{$teacher->user->id}},{{$row}}">
+            <span class="glyphicon glyphicon-edit"></span>
+        </button></td>
+        <td><button class="delete-modal btn btn-danger"
+          data-info="{{$teacher->id}},{{$teacher->user->name}},{{$teacher->user->username}},{{$teacher->user->email}},{{$teacher->ngaysinh}},{{$teacher->truong}},{{$teacher->khoa}},{{$teacher->sodienthoai}},{{$teacher->user->id}},{{$row}}">
+          <span class="glyphicon glyphicon-trash"></span>
+      </button></td>
             @endforeach
           </tbody>
         </table>

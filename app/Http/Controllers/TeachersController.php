@@ -99,6 +99,8 @@ class TeachersController extends Controller
         'name' => 'required|string|max:255',
         'ngaysinh' => 'date_format:"Y-m-d"|required',
         'sodienthoai' => 'required|numeric',
+        'truong' => 'required',
+        'khoa' => 'required'
     ));
         $teacherforedit = Teacher::find($id);
         $userforeidt = User::find($request['user_id']);
@@ -107,14 +109,24 @@ class TeachersController extends Controller
         $teacherforedit->truong = $request['truong'];
         $teacherforedit->khoa = $request['khoa'];
         $userforeidt->name = $request['name'];
+        $response[] = [
+          'name' => $userforeidt->name,
+          'username' => $userforeidt->username,
+          'email' => $userforeidt->email,
+          'ngaysinh' => $teacherforedit->ngaysinh,
+          'truong' => $teacherforedit->truong,
+          'khoa' => $teacherforedit->khoa,
+          'sodienthoai' => $teacherforedit->sodienthoai,
+          'id' => $teacherforedit->id,
+          'user_id' => $userforeidt->id
+        ];
         if ( $teacherforedit->save() &&  $userforeidt->save())
         {
-          return back()->with('success','Đã sửa thành công');
-        }
-        else {
-         return back()->with('error','Không thể sửa dữ liệu được hãy kiểm trả lại');
+          return response ()->json ( $response);
         }
     }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -126,7 +138,15 @@ class TeachersController extends Controller
           $user = User::find($id);
           if ( $user->delete())
           {
-            return back()->with('success','Đã xóa thành công');
+            return 'Succes';
+          }
+    }
+    public function deleteTeacher($id)
+    {
+          $user = User::find($id);
+          if ( $user->delete())
+          {
+            return 'Succes';
           }
     }
     public function deleteAll($state)
