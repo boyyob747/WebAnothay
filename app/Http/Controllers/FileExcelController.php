@@ -40,7 +40,6 @@ class FileExcelController extends Controller
       $msgSucces = "<br> ";
       $dong = 0;
       $data = Excel::load(Input::file('sinhvien'), function($reader) {})->get(); //lophocphan_id
-      echo 'lophocphan_id : '.$request['lophocphan_id'].'<br>';
        if(!empty($data) && $data->count()){
            foreach ($data->toArray() as $key => $value) {
                if(!empty($value)){
