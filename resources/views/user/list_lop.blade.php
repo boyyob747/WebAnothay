@@ -11,6 +11,7 @@
           <tr>
             <th>#</th>
             <th>Tên lớp</th>
+            <th>Môn</th>
             <th>Giảng viên</th>
             <th>Nhóm thi</th>
             <th>Điểm</th>
@@ -26,6 +27,7 @@
           <tr class="item">
             <th scope="row"> {{$row}}</th>
             <td>{{$thongtinlophocphan->lophocphan->ten_lophocphans}}</td>
+            <td>{{$thongtinlophocphan->lophocphan->monhoc->monhoc}}</td>
             <td>{{$thongtinlophocphan->lophocphan->teacher->user->name}}</td>
             <td>{{$thongtinlophocphan->nhom_thi}}</td>
             <td>chưa có điểm</td>
