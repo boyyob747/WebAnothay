@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <div class="panel panel-primary" >
   <!-- style="min-height: 70%;
   height: 90%;" -->
@@ -85,3 +86,6 @@
         </table>
       </div>
     </div>
+</div>
+</div>
+@include('sinhvien.modal_sinhvien',['submitButtonText' => 'Thêm sinh viên'])

@@ -1,3 +1,10 @@
+function popitup(link) {
+  var w = window.open(link.href,
+        link.target||"_blank",
+        'menubar=no,toolbar=no,location=no,directories=no,status=no,scrollbars=yes,resizable=no,dependent,width=800,height=620,left=0,top=0');
+  return w?false:true; // allow the link to work if popup is blocked
+ }
+
 function submitForm(action) {
     var form = document.getElementById('form_create_teacher');
     form.action = action;

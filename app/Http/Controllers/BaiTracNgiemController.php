@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Baitracnghiem;
+use App\Cauhoi;
 class BaiTracNgiemController extends Controller
 {
     /**
@@ -64,7 +65,13 @@ class BaiTracNgiemController extends Controller
       $data['lophocphan_id'] = $id;
       return view('baitracnghiem.index',['baitracs' => $baitracs],$data);
     }
-
+    public function getBaiTap($id)
+    {
+        $baitrac = Baitracnghiem::find($id);
+        $data['lophocphan'] = 'class="active"';
+        $cauhois = Cauhoi::where('id_baithi', $id)->get();
+        return view('user.lambaitap',['baitrac' => $baitrac,'cauhois' => $cauhois],$data);
+    }
     /**
      * Show the form for editing the specified resource.
      *

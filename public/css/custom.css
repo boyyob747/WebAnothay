@@ -1,4 +1,5 @@
 
+
 html,
 body {
   height: 100%;
@@ -14,37 +15,54 @@ body {
   /* Pad bottom by footer height */
   padding: 0 0 60px;
 }
-
+#count_time
+{
+  position: fixed;
+  right: 0;
+  margin-right: 10%;
+}
 /* Set the fixed height of the footer here */
 #footer {
   position: absolute;
   width: 100%;
-  height: 150px;
   background-color: #222222;
+  padding:0px 0px;
   text-align: center;
+  margin-top: 100px;
+}
+.logo{
+    color:#FFF;
+    font-weight:800;
+    font-size:30px;
+}
 
+.adress span , .contact span , .social span{
+   color:#675f5f;
+   font-weight: 800;
+   padding-top:20px;
+   padding-bottom:20px;
+   display: block;
+   text-transform: uppercase;
+   font-size: 13px;
+   letter-spacing: 3px;
 }
-.footer-section {
-    background: #9b1d2a;
-    padding: 5em 0;
 
+.adress li p , .contact li a , .social li a{
+    color:#675f5f;
+    letter-spacing: 2px;
+    text-decoration:none;
+    font-size:12px;
 }
 
-.footer-column h4 {
-    font-size: 2em;
-    color: #fff;
-    margin-bottom: .5em;
+.adress, .contact , .social{
+    list-style: none;
 }
-.footer-column p {
-    font-size: .96em;
-    color: #eee;
-    line-height: 1.8em;
+
+.social li{
+    float:left;
 }
-.footer-column ul, li, a {
-    font-size: .96em;
-    color: #eee;
-    line-height: 1.8em;
-}
+
+
 body {
   background: url('http://dut.udn.vn/Files/admin/images/Tin_tuc/Daotao/2017/HCERES/image002.png') fixed;
  background-size: cover;
@@ -252,10 +270,6 @@ body {
     color: #e52d27;
 }
 
-.fa-rss {
-    color: #FF6600;
-}
-
 .fa-vine {
     color: #00a478;
 }
@@ -283,3 +297,4 @@ body {
     transition: 1s;
     -webkit-transition: 1s;
   }
+/*for cau hoi*/

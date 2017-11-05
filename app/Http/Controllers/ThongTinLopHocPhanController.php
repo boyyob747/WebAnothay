@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Thongtinlophocphan;
+use Auth;
+use App\Student;
 class ThongTinLopHocPhanController extends Controller
 {
     /**
@@ -50,6 +52,20 @@ class ThongTinLopHocPhanController extends Controller
         $data['lophocphan'] = 'class="active"';
         $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
         return view('thongtinlophocphan.index',['thongtinlophocphans' => $thongtinlophocphans],$data);
+    }
+
+    public function getThongTinLopSV()
+    {
+      if (Auth::check()) {
+            $id = Auth::user()->id;
+            $student = Student::where('user_id', $id)->get()->first();
+             $thongtinlophocphans = Thongtinlophocphan::where('student_id', $student->id)->get();
+            $data['lophocphan'] = 'class="active"';
+            $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
+            return view('user.list_lop',['thongtinlophocphans' => $thongtinlophocphans],$data);
+          }
+        return abort(404);
+
     }
 
     /**

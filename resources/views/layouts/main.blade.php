@@ -39,10 +39,10 @@
           if ($state == 0)
           {
             ?>
-            <li <?php if(isset($baithi))
+            <li <?php if(isset($lophocphan))
             {
-              echo $baithi;
-            } ?>><a href="{{ action('PagesController@about')}}">Bài thi</a></li>
+              echo $lophocphan;
+            } ?>><a href="{{ action('ThongTinLopHocPhanController@getThongTinLopSV')}}">Lớp học phần</a></li>
             <li <?php if(isset($baitab))
             {
               echo $baitab;
@@ -113,15 +113,49 @@
 </div>
 
    <div id="footer">
-  <div class="containergg">
-            <span>
-              <a href='https://www.facebook.com/boy.a.anothay'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+     <div class="container">
+          <div class="row">
 
-            </span>
-            <span>
-              <h3>Copyright by Nhóm 1A</h3>
-            </span>
-  </div>
+                   <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                       <ul class="adress">
+                            <span>Adress</span>
+                            <li>
+                               <p>Trường đại học bách khoa, 60 ngô sĩ liêng</p>
+                             </li>
+
+                             <li>
+                               <p>boysavan@gmail.com</p>
+                             </li>
+                        </ul>
+                   </div>
+
+                   <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                       <ul class="contact">
+                            <span>Contact</span>
+                            <li>
+                               <a href="{{url('/home')}}">Home</a>
+                             </li>
+
+                             <li>
+                                <a href="{{ action('PagesController@about')}}">About</a>
+                             </li>
+                       </ul>
+                   </div>
+
+
+                   <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                   </div>
+
+                   <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                      <ul class="social">
+                                 <span>Social</span>
+                                      <a href='https://www.facebook.com/boy.a.anothay'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+                                      <a href="https://github.com/"><i class="fa fa-github fa-3x" ></i></a>
+
+                        </ul>
+                  </div>
+              </div>
+           </div>
 </div>
 
 
