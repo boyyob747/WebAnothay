@@ -8,17 +8,6 @@ $(document).ready(function() {
 } );
 
 $(document).on('click',function(){
-    // $('#datepicker').datetimepicker({
-    //     locale: 'it',
-    //     viewMode: 'years',
-    //     format: 'DD/MM/YYYY',
-    // }).on("dp.show", function(){
-    //     console.log("dtp open");
-    //     if (firstOpen==true){
-    //         $(this).data('DateTimePicker').date("01/01/1980");
-    //         firstOpen=false;
-    //     }
-    // });
     $('#datepicker').datepicker({
             format: 'yyyy-mm-dd'
     });
@@ -93,7 +82,21 @@ $(document).on('click', '.edit-modal', function() {
         $('#form_create_teacher').show();
         $('.delete_msg').hide();
         $('#btn_acction').show();
-    });
+        $("#username").prop('disabled', true);
+        $("#email").prop('disabled', true);
+});
+function fillmodalData(details){
+    $('#id').val(details[0]);
+    $('#name').val(details[1]);
+    $('#username').val(details[2]);
+    $('#email').val(details[3]);
+    $('#datepicker').val(details[4]);
+    $('#truong').val(details[5]);
+    $('#khoa').val(details[6]);
+    $('#sodienthoai').val(details[7]);
+    $('#user_id').val(details[8]);
+    $('#row').val(details[9]);
+}
     $(document).on('click', '#btn_add', function() {
             $('#btn_acction').hide();
             $('.modal-title').text('Add');
@@ -103,23 +106,12 @@ $(document).on('click', '.edit-modal', function() {
             $('#form_create_teacher').show();
             $('.delete_msg').hide();
             $('#btn_save_teacher').show();
-
+            $("#email").prop('disabled', false);
+            $("#username").prop('disabled', false);
+            $("#password").prop('disabled', false);
+            fillmodalData(['','','','','','Truong dai hoc bach khoa','Công nghệ thông tin','','','']);
         });
-    function fillmodalData(details){
-        $('#id').val(details[0]);
-        $('#name').val(details[1]);
-        $('#username').val(details[2]);
-        $("#username").prop('disabled', true);
-        $('#password').prop('disabled', true)
-        $('#email').val(details[3]);
-        $("#email").prop('disabled', true);
-        $('#datepicker').val(details[4]);
-        $('#truong').val(details[5]);
-        $('#khoa').val(details[6]);
-        $('#sodienthoai').val(details[7]);
-        $('#user_id').val(details[8]);
-        $('#row').val(details[9]);
-    }
+
 
     $(document).on('click', '#btn_acction', function() {
       var id = $("#id").val();
@@ -135,6 +127,7 @@ $(document).on('click', '.edit-modal', function() {
                   'name': $('#name').val(),
                   'ngaysinh': $('#datepicker').val(),
                   'truong': $('#truong').val(),
+                  'password': $('#password').val(),
                   'khoa': $('#khoa').val(),
                   'sodienthoai': $('#sodienthoai').val(),
                   '_method' : 'PUT'

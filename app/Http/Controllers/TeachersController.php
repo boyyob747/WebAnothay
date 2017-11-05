@@ -7,9 +7,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use App\Teacher;
 use App\User;
+use Auth;
 use App\Http\Requests\TeacherRequest;
 use PhpParser\Node\Expr\Array_;
-use Auth;
+
 class TeachersController extends Controller
 {
     /**
@@ -21,11 +22,6 @@ class TeachersController extends Controller
     {
         $users = array();
         $data['giaovien'] = 'class="active"';
-        // $teachers = DB::table('teachers')->get();
-        // foreach ($teachers as $teacher)
-        // {
-        //     $users[] =  User::find($teacher->user_id);
-        // }
         $teachers = Teacher::all();
         return view('teachers.teacher', ['teachers' => $teachers],$data);
     }
@@ -37,8 +33,8 @@ class TeachersController extends Controller
      */
     public function create()
     {
-      $data['giaovien'] = 'class="active"';
-        return view('teachers.add_teacher',$data);
+      // $data['giaovien'] = 'class="active"';
+      // return view('teachers.add_teacher',$data);
     }
 
     /**
@@ -95,13 +91,28 @@ class TeachersController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->validate($request, array (
-        'name' => 'required|string|max:255',
-        'ngaysinh' => 'date_format:"Y-m-d"|required',
-        'sodienthoai' => 'required|numeric',
-        'truong' => 'required',
-        'khoa' => 'required'
-    ));
+      if($request['password'] != '')
+      {
+        $this->validate($request, array (
+          'name' => 'required|string|max:255',
+          'ngaysinh' => 'date_format:"Y-m-d"|required',
+          'sodienthoai' => 'required|numeric',
+          'truong' => 'required',
+          'khoa' => 'required',
+          'password' => 'required|string|min:6|'
+      ));
+      }
+      else {
+        $this->validate($request, array (
+          'name' => 'required|string|max:255',
+          'ngaysinh' => 'date_format:"Y-m-d"|required',
+          'sodienthoai' => 'required|numeric',
+          'truong' => 'required',
+          'khoa' => 'required'
+      ));
+      }
+
+        $msgError = "";
         $teacherforedit = Teacher::find($id);
         $userforeidt = User::find($request['user_id']);
         $teacherforedit->ngaysinh = $request['ngaysinh'];
@@ -109,6 +120,10 @@ class TeachersController extends Controller
         $teacherforedit->truong = $request['truong'];
         $teacherforedit->khoa = $request['khoa'];
         $userforeidt->name = $request['name'];
+        if($request['password'] != '')
+        {
+            $userforeidt->password = bcrypt($request['password']);
+        }
         $response[] = [
           'name' => $userforeidt->name,
           'username' => $userforeidt->username,

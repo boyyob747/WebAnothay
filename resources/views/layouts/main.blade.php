@@ -12,7 +12,8 @@
   {!! Html::script('js/dataTables.bootstrap.min.js') !!}
   {!! Html::style('awesome/css/font-awesome.min.css') !!}
 </head>
-<body style="height: 1400px;">
+<body>
+  <div id="wrap">
   <div class="navbar navbar-inverse">
     <div class="container">
       <a class="navbar-brand" href="#">TEST ONLINE</a>
@@ -52,8 +53,12 @@
             } ?>><a href="{{ action('PagesController@about')}}">Điểm thi</a></li>
           <?php }
           else if ($state == 1) // giao vien
-          {
-
+          { ?>
+            <li <?php if(isset($lophocphan))
+            {
+              echo $lophocphan;
+            } ?>><a href="{{ action('LopHocPhanController@index')}}">Tạo lớp học phần</a></li>
+          <?php
           }
           else { // admin
           ?>
@@ -61,10 +66,10 @@
           {
             echo $giaovien;
           } ?>><a href="{{ action('TeachersController@index')}}">Giáo viên</a></li>
-          <li <?php if(isset($baitab))
+          <li <?php if(isset($sinhvien))
           {
-            echo $baitab;
-          } ?>><a href="{{ action('PagesController@about')}}">Sinh viên</a></li>
+            echo $sinhvien;
+          } ?>><a href="{{ action('StudentsController@index')}}">Sinh viên</a></li>
         <?php } ?>
           @endguest
         </ul>
@@ -101,17 +106,24 @@
     </div>
   </div>
 </div>
-  <div class="container-fluid col-md-8 col-md-offset-2 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0">
+  <div id="content-main" class="container-fluid">
   @yield('content')
   </div>
 
+</div>
 
-<footer class="navbar navbar-inverse navbar-fixed-bottom">
-  <div class="container">
-    <p class="navbar-text">&copy;CopyRight By Nhóm 1A</p>
-    <!-- : 1.Khanh Minh 2.Hoàng Đình 3.Quý Định Lê 3.Dung Phương 5.Anothay Alounsavanh-2017 -->
+   <div id="footer">
+  <div class="containergg">
+            <span>
+              <a href='https://www.facebook.com/boy.a.anothay'><i class="fa fa-facebook fa-3x fa-fw"></i></a>
+
+            </span>
+            <span>
+              <h3>Copyright by Nhóm 1A</h3>
+            </span>
   </div>
-</footer>
+</div>
+
 
 {!! Html::script('js/customScript.js') !!}
 

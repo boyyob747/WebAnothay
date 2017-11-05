@@ -11,4 +11,8 @@ class Teacher extends Model
   {
     return $this->belongsTo('App\User');
   }
+  public function lophocphan()
+  {
+    return $this->hasMany('App\Lophocphan');
+  }
 }

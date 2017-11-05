@@ -63,3 +63,12 @@ Options -Indexes
     Order allow,deny
     Deny from all
 </Files>
+
+//Migration
+php artisan make:migration create_namefile_table --create=nametable
+php artisan make:migration add_some_field_name --table=somefield
+php artisan migrate
+php artisan migrate:rollback
+php artisan migrate:reset
+php artisan migrate:refresh
+php artisan make:model NameTable

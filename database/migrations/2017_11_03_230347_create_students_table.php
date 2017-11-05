@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateStutendTable extends Migration
+class CreateStudentsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,9 +17,10 @@ class CreateStutendTable extends Migration
           $table->increments('id');
           $table->integer('user_id')->unsigned();
           $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+          $table->string('lop');
+          $table->string('khoa');
           $table->date('ngaysinh');
           $table->string('mssv');
-          $table->string('khoa');
           $table->string('sodienthoai');
           $table->timestamps();
         });
