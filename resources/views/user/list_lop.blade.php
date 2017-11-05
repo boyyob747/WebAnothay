@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('title','Lớp học phần')
 @section('content')
-<div class="container-fluid col-md-8 col-md-offset-2">
+<div class="container-fluid col-md-10 col-md-offset-1">
   <div class="panel panel-primary">
   <div class="panel-heading">Dách sách lớp học phần của : {{Auth::user()->name}}</div>
   <div class="panel-body">
