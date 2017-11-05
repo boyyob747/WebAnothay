@@ -5,6 +5,12 @@
   <div class="panel panel-primary">
   <div class="panel-heading">Dách sách lớp học phần của : {{Auth::user()->name}}</div>
   <div class="panel-body">
+    @if ($message = Session::get('error_no_bai_tap'))
+    <div class="alert alert-danger alert-dismissable fade in">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <b><?=$message?></b>
+    </div>
+    @endif
     <div class="table-responsive">
       <table class="table table table-hover" id="table_teachers">
         <thead>

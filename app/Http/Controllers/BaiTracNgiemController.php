@@ -67,10 +67,16 @@ class BaiTracNgiemController extends Controller
     }
     public function getBaiTap($id)
     {
-        $baitrac = Baitracnghiem::find($id);
-        $data['lophocphan'] = 'class="active"';
-        $cauhois = Cauhoi::where('id_baithi', $id)->get();
-        return view('user.lambaitap',['baitrac' => $baitrac,'cauhois' => $cauhois],$data);
+      //lophoc_id
+        $baitrac = Baitracnghiem::where('lophoc_id', $id)->get();
+        if($baitrac->isEmpty())
+        return back()->with('error_no_bai_tap','Chưa có bài tập của môn này');
+        else {
+          $data['lophocphan'] = 'class="active"';
+          $cauhois = Cauhoi::where('id_baithi', $baitrac->first()->id)->get();
+          return view('user.lambaitap',['baitrac' => $baitrac->first(),'cauhois' => $cauhois],$data);
+        }
+
     }
     /**
      * Show the form for editing the specified resource.

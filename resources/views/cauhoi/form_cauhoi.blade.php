@@ -20,7 +20,7 @@
   @if ($message = Session::get('usernameInsertError'))
   <div class="alert alert-danger alert-dismissable fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-      <strong>Lỗi : </strong> <b>{{!! Session::get('usernameInsertError') !!}}</b>
+      <strong>Lỗi : </strong> <b><?=$message?></b>
   </div>
   @endif
   @if($errors-> any())
@@ -34,7 +34,7 @@
   @if ($message = Session::get('success'))
   <div class="alert alert-success alert-dismissable fade in">
     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-    <strong>Thành công : </strong> <b>{{!! Session::get('success') !!}}</b>
+    <strong>Thành công : </strong> <b><?=$message?></b>
   </div>
   @endif
   <div class="table-responsive">

@@ -98,6 +98,8 @@ class FileExcelController extends Controller
            return back()->with('success','Đã nhập dữ liệu thành công');
            }
            else {
+             if($msgSucces == '<br> ')
+             $msgSucces = 'Không thể nhập được dữ liệu';
            return back()->with('usernameInsertError',$msgError)->with('success',$msgSucces);
            }
          }
@@ -150,7 +152,9 @@ class FileExcelController extends Controller
            return back()->with('success','Đã nhập dữ liệu thành công');
            }
            else {
-           return back()->with('usernameInsertError',$msgError)->with('success',$msgSucces);
+             if($msgSucces == '<br> ')
+             $msgSucces = 'Không thể nhập được dữ liệu';
+             return back()->with('usernameInsertError',$msgError)->with('success',$msgSucces);
            }
          }
         // return;
@@ -202,6 +206,8 @@ class FileExcelController extends Controller
             return back()->with('success','Đã nhập dữ liệu thành công');
            }
            else {
+             if($msgSucces == '<br> ')
+             $msgSucces = 'Không thể nhập được dữ liệu';
             return back()->with('usernameInsertError',$msgError)->with('success',$msgSucces);
            }
          }
