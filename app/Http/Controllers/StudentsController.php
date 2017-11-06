@@ -60,7 +60,7 @@ class StudentsController extends Controller
           'state' => 0,
           'username' => $request['username'],
           'email' =>  $request['email'],
-          'password' => bcrypt($request['ngaysinh']),
+          'password' => bcrypt($request['username']),
       ]);
       $student->user_id = $user->id;
       $student->save();
@@ -109,7 +109,7 @@ class StudentsController extends Controller
         $student = Student::find($id);
         $user = User::find($request['user_id']);
         $student->ngaysinh = $request['ngaysinh'];
-        $user->password= bcrypt($request['ngaysinh']);
+        $user->password= bcrypt($request['username']);
         $student->sodienthoai = $request['sodienthoai'];
         $student->lop = $request['lop'];
         $student->khoa = $request['khoa'];

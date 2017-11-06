@@ -23,7 +23,9 @@ Route::resource('/home/student','StudentsController');
 Route::resource('/home/lophocphan','LopHocPhanController');//BaiTracNghiem
 Route::resource('/home/thongtinlophocphans','ThongTinLopHocPhanController'); //CauHoiController
 Route::resource('/home/baitracnghiem','BaiTracNgiemController');
-Route::get('/home/lambaitap/{id}','BaiTracNgiemController@getBaiTap');//getExportTeachers
+Route::get('/home/getdsbaitap/{id}','BaiTracNgiemController@getBaiTap');//getExportTeachers
+Route::get('/home/lambai/{id}','BaiTracNgiemController@lamBaitap');
+Route::get('/home/counttime','BaiTracNgiemController@doCountTime');
 Route::resource('/home/cauhoi','CauHoiController');
 Route::get('/import','FileExcelController@getImport');//getExportTeachers
 Route::post('/importsinhvien','FileExcelController@postImportSinhvien'); //importsinhvienforlophoc getThongTinLopSV

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Lophocphan extends Model
 {
-  protected $fillable = ['ten_lophocphans'];
+  protected $fillable = ['ten_lophocphans','id'];
   public function monhoc()
   {
     return $this->belongsTo('App\Monhoc');

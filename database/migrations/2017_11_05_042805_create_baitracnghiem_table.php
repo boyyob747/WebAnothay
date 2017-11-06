@@ -17,10 +17,10 @@ class CreateBaitracnghiemTable extends Migration
           $table->increments('id');
           $table->timestamps();
           $table->string('title');
-          $table->integer('soluongcauhoi')->default('0');
           $table->integer('diemcua')->default('0'); // 0 la bai thi giua ky; 1 la bai thi cuoi ky ;2 la bai tap ;3 la tap thoi ko diem
           $table->integer('lophoc_id')->unsigned();
           $table->foreign('lophoc_id')->references('id')->on('lophocphans')->onDelete('cascade');
+          $table->integer('duration')->default('0');
         });
     }
 

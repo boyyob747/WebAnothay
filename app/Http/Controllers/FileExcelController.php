@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Teacher;
 use App\Student;
 use App\User;
-use App\Diem;
 use App\Thongtinlophocphan;
 use Input;
 use DB;
@@ -59,7 +58,7 @@ class FileExcelController extends Controller
                           'state' => 0,
                           'username' => $value['mssv'],
                           'email' =>  $value['email'],
-                          'password' => bcrypt($value['ngaysinh']),
+                          'password' => bcrypt($value['mssv']),
                       ]);
                       $sinhvien->user_id = $user->id;
                       $sinhvien->save();
@@ -69,9 +68,6 @@ class FileExcelController extends Controller
                      $thongtinlophocphan->STT = $dong;
                      $thongtinlophocphan->lophocphan_id = $request['lophocphan_id'];
                      $thongtinlophocphan->nhom_thi = $dong > 28 ? 'B' : 'A';
-                     $diem = new Diem();
-                     $diem->save();
-                     $thongtinlophocphan->diem_id = $diem->id;
                      $thongtinlophocphan->save();
                    }
                    else {
@@ -81,9 +77,6 @@ class FileExcelController extends Controller
                        $thongtinlophocphan->STT = $dong;
                        $thongtinlophocphan->lophocphan_id = $request['lophocphan_id'];
                        $thongtinlophocphan->nhom_thi = $dong > 28 ? 'B' : 'A';
-                       $diem = new Diem();
-                       $diem->save();
-                       $thongtinlophocphan->diem_id = $diem->id;
                        $thongtinlophocphan->save();
                    }
                  }

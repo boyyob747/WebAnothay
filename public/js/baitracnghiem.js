@@ -18,7 +18,7 @@ $(document).on('click', '#btn_save_baitrac', function() {
             data: {
               '_token': token,
               'lophocphan_id': $('#lophocphan_id').val(),
-              'soluongcauhoi': $('#soluongcauhoi').val(),
+              'thoigianthi': $('#thoigianthi').val(),
               'title': $('#title').val(),
               'diemcua': $('#diemcua').val(),
               '_method' : 'POST'

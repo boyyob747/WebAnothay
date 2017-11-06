@@ -27,18 +27,17 @@
                             {{ Form::hidden('row', '', array('id' => 'row')) }}
                           </div>
                           <br>
-                          <div class="input-group input-group-lg">
-                                  <span class="input-group-addon" id="sizing-addon1">Số lương câu hỏi</span>
-                              {!!Form::number('soluongcauhoi',null, array('id' => 'soluongcauhoi','class'=> 'form-control','placeholder' => 'Số lương câu hỏi','aria-describedby' => 'sizing-addon1', 'required'))!!}
+                            <div class="input-group input-group-lg">
+                                    <span class="input-group-addon" id="sizing-addon1">Số lương câu hỏi</span>
+                                {!!Form::number('thoigianthi',null, array('id' => 'thoigianthi','class'=> 'form-control','placeholder' => 'Thời gian làm bài','aria-describedby' => 'sizing-addon1', 'required'))!!}
+                                    <span class="input-group-addon" id="basic-addon2">Phút</span>
                             </div>
                             <br>
                             <div class="input-group input-group-lg">
                                     <span class="input-group-addon" id="sizing-addon1">Điểm</span>
                             {{ Form::select('diemcua', [
                                 '0' => 'Luyền tập không có điểm',
-                                    '1' => 'Điểm bài tập',
-                                    '2' => 'Điểm giữa kỳ',
-                                    '3' => 'Điểm cuối kỳ'], null, ['class' => 'form-control','id' => 'diemcua']) }}
+                                    '1' => 'Điểm thi'], null, ['class' => 'form-control','id' => 'diemcua']) }}
                               </div>
                               <br>
                         <div class="text-right">

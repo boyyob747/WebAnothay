@@ -14,8 +14,4 @@ class Thongtinlophocphan extends Model
   {
     return $this->belongsTo('App\Student');
   }
-  public function diem()
-  {
-    return $this->belongsTo('App\Diem');
-  }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Cauhoi;
 use App\Baitracnghiem;
+use Hash;
 class CauHoiController extends Controller
 {
     /**
@@ -36,7 +37,29 @@ class CauHoiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+      $this->validate($request, array (
+        'cau_hoi' => 'required|string',
+        'cau_tla' => 'required|string',
+        'cau_tlb' => 'required|string',
+        'cau_tlc' => 'required|string',
+        'cau_tld' => 'required|string',
+        'cau_tl' => 'required'
+    ));
+      $cauhoi = new Cauhoi();
+      $cauhoi->cautl_a = $request['cau_tla'];
+      $cauhoi->cautl_b = $request['cau_tlb'];
+      $cauhoi->cautl_c = $request['cau_tlc'];
+      $cauhoi->cautl_d = $request['cau_tld'];
+      $cauhoi->cau_hoi = $request['cau_hoi'];
+      $cauhoi->cau_tl = bcrypt($request['cau_tl']);
+      $cauhoi->id_baithi = $request['id_baithi'];
+      $cauhoi->save();
+
+      $baitracs = Baitracnghiem::where('id', $request['id_baithi'])->get();
+      $data['lophocphan'] = 'class="active"';
+      $data['baitrac'] = $baitracs->first();
+      $cauhois = Cauhoi::where('id_baithi', $request['id_baithi'])->get();
+      return view('cauhoi.form_cauhoi',['cauhois' => $cauhois],$data);
     }
 
     /**
@@ -51,22 +74,7 @@ class CauHoiController extends Controller
       $data['lophocphan'] = 'class="active"';
       $data['baitrac'] = $baitracs->first();
       $cauhois = Cauhoi::where('id_baithi', $id)->get();
-      if ($cauhois->isEmpty()) {
-        for($i=0;$i<$baitracs->first()->soluongcauhoi;$i++)
-        {
-          $cauhoi = new Cauhoi();
-          $cauhoi->id_baithi = $id;
-          $cauhoi->save();
-        }
-        $cauhoiss = Cauhoi::where('id_baithi', $id)->get();
-        return view('cauhoi.index',['cauhois' => $cauhoiss],$data);
-      }
-      else {
-        return view('cauhoi.index',['cauhois' => $cauhois],$data);
-      }
-
-
-
+      return view('cauhoi.index',['cauhois' => $cauhois],$data);
     }
 
     /**

@@ -33,7 +33,6 @@
                             <?php
                             }
                              ?>
-
                             {{ Form::hidden('row', '', array('id' => 'row')) }}
 
                       </div>

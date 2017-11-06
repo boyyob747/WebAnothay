@@ -2,5 +2,5 @@
 @section('title','Bài')
 @section('content')
 {!! Html::script('js/cauhoi.js') !!}
-@include('cauhoi.form_cauhoi')
+@include('cauhoi.add_cauhoi')
 @stop

@@ -53,7 +53,6 @@
         <tr>
           <th>STT</th>
           <th>Tên bài trắc nghiệm</th>
-          <th>Số lương câu hỏi</th>
           <th>Điểm</th>
           <th>Xem</th>
           <th>Xóa</th>
@@ -67,7 +66,6 @@
         <tr class="item{{$baitrac->id}}">
           <th scope="row">{{$row}}</th>
           <td>{{$baitrac->title}}</td>
-          <td>{{$baitrac->soluongcauhoi}}</td>
           @if($baitrac->diemcua == 0)
           <td>Luyền tập không có điểm</td>
           @elseif($baitrac->diemcua == 2)

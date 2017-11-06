@@ -55,9 +55,7 @@
           <th>Điện thoại</th>
           <th>Lớp sinh hoạt</th>
           <th>Nhóm thi</th>
-          <th>Điểm giữa kỳ</th>
-          <th>Điểm cuối kỳ</th>
-          <th>Điểm bài tập</th>
+          <th>Điểm</th>
           <th>Cho phép thi</th>
           <th><input type="checkbox" id="allcb" name="allcb"/></th>
           <th>Xóa</th>
@@ -72,20 +70,10 @@
           <td>{{$thongtinlophocphan->student->sodienthoai}}</td>
           <td>{{$thongtinlophocphan->student->lop}}</td>
           <td>{{$thongtinlophocphan->nhom_thi}}</td>
-          @if($thongtinlophocphan->diem->diem_giuaky < 0)
+          @if($thongtinlophocphan->diem < 0)
           <td>Chưa thi</td>
           @else
-          <td>{{$thongtinlophocphan->diem->diem_giuaky}}</td>
-          @endif
-          @if($thongtinlophocphan->diem->diem_baitap < 0)
-          <td>Chưa thi</td>
-          @else
-          <td>{{$thongtinlophocphan->diem->diem_baitap}}</td>
-          @endif
-          @if($thongtinlophocphan->diem->diem_cuoiky < 0)
-          <td>Chưa thi</td>
-          @else
-          <td>{{$thongtinlophocphan->diem->diem_cuoiky}}</td>
+          <td>{{$thongtinlophocphan->diem}}</td>
           @endif
         <td>
         Cho phép thi

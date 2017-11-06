@@ -22,9 +22,9 @@ class CreateThongtinlophocphanTable extends Migration
           $table->foreign('lophocphan_id')->references('id')->on('lophocphans')->onDelete('cascade');
           $table->integer('student_id')->unsigned()->index();
           $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
-          $table->integer('diem_id')->unsigned()->index();
-          $table->foreign('diem_id')->references('id')->on('diems')->onDelete('cascade');
+          $table->integer('diem')->default('-1');
           $table->integer('state')->default('0');//0 la chua cho thi 1 la cho thi
+          $table->time('end_time')->nullable();
         });
     }
 

@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Baitracnghiem;
+use App\Thongtinlophocphan;
 use App\Cauhoi;
+use App\Student;
+use Auth;
 class BaiTracNgiemController extends Controller
 {
     /**
@@ -38,11 +41,12 @@ class BaiTracNgiemController extends Controller
     {
       $this->validate($request, array (
         'title' => 'required|string|max:191',
-        'soluongcauhoi' => 'required|numeric'
+        'thoigianthi' => 'required|numeric'
     ));
+      $duration = $request['thoigianthi'];
       $baitrac = new Baitracnghiem();
+      $baitrac->duration = $duration;
       $baitrac->title = $request['title'];
-      $baitrac->soluongcauhoi = $request['soluongcauhoi'];
       $baitrac->diemcua = $request['diemcua'];//lophoc_id
       $baitrac->lophoc_id = $request['lophocphan_id'];
       $baitrac->save();
@@ -67,16 +71,63 @@ class BaiTracNgiemController extends Controller
     }
     public function getBaiTap($id)
     {
-      //lophoc_id
-        $baitrac = Baitracnghiem::where('lophoc_id', $id)->get();
-        if($baitrac->isEmpty())
+        $baitracs = Baitracnghiem::where('lophoc_id', $id)->where('diemcua', 0)->get();
+        if($baitracs->isEmpty())
         return back()->with('error_no_bai_tap','Chưa có bài tập của môn này');
         else {
           $data['lophocphan'] = 'class="active"';
-          $cauhois = Cauhoi::where('id_baithi', $baitrac->first()->id)->get();
-          return view('user.lambaitap',['baitrac' => $baitrac->first(),'cauhois' => $cauhois],$data);
+          return view('user.danhsach_baitap',['baitracs' => $baitracs],$data);
         }
 
+    }
+    public function lamBaitap($id) //id = $baitrac->id
+    {
+        $cauhois =  Cauhoi::where('id_baithi', $id)->get();
+        $baitrac = Baitracnghiem::where('id', $id)->where('diemcua', 0)->get()->first();
+        $duration = $baitrac->duration;
+        $student = Student::where('user_id', Auth::user()->id)->get()->first();
+        $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
+        //for thi just test
+        session(['id_thongtin' => $thongtinlophocphan->id ] );
+        // if($thongtinlophocphan->end_time == null)
+        // {
+          date_default_timezone_set('Asia/Bangkok');
+          $timenow = date("Y-m-d H:i:s");
+          $endtime = date("Y-m-d H:i:s",strtotime('+'.$duration.'minutes',strtotime($timenow)));
+          session(['end_time' => $endtime ] );
+        //   $thongtinlophocphan->end_time = $endtime;
+        //   $thongtinlophocphan->save();
+        // }
+        // else {
+        //   session(['end_time' => $thongtinlophocphan->end_time] );
+        // }
+        if($cauhois->isEmpty())
+        return back()->with('error_no_bai_tap','Chưa có câu hỏi của bài này');
+        else {
+          $data['lophocphan'] = 'class="active"';
+          $data['baitrac'] = $baitrac;
+          return view('user.lambaitap',['cauhois' => $cauhois],$data);
+        }
+    }
+    public function doCountTime()
+    {
+      date_default_timezone_set('Asia/Bangkok');
+      $from_time1 = date("Y-m-d H:i:s");
+      $to_time1 = session('end_time');
+      $timefirst = strtotime($from_time1);
+	     $timesecond =strtotime($to_time1);
+	      $diffsec =$timesecond-$timefirst;
+	       $msg = "";
+	        if ($diffsec  <= 0)
+          {
+            $id_thongtin = session('id_thongtin');
+            $thongtinlophocphan = Thongtinlophocphan::find($id_thongtin);
+            $thongtinlophocphan->end_time = null;
+            $thongtinlophocphan->save();
+            echo 'stop';
+          }
+	        else
+		      echo gmdate("H:i:s",$diffsec);
     }
     /**
      * Show the form for editing the specified resource.

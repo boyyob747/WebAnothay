@@ -341,7 +341,7 @@ class ComposerStaticInit8a1ad78c90302492f6e03ce66148a144
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
-        'App\\Http\\Controllers\\BaiTracNghiem' => __DIR__ . '/../..' . '/app/Http/Controllers/BaiTracNghiem.php',
+        'App\\Http\\Controllers\\BaiTracNgiemController' => __DIR__ . '/../..' . '/app/Http/Controllers/BaiTracNgiemController.php',
         'App\\Http\\Controllers\\CauHoiController' => __DIR__ . '/../..' . '/app/Http/Controllers/CauHoiController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DiemController' => __DIR__ . '/../..' . '/app/Http/Controllers/DiemController.php',
