@@ -2,7 +2,11 @@
 <div class="modal" id="modalCauhoi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
      <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
-         bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+     //<![CDATA[
+       bkLib.onDomLoaded(function() {
+            new nicEditor().panelInstance('cau_hoi');
+       });
+       //]]>
      </script>
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
@@ -16,24 +20,25 @@
                     </div>
                 </div>
                 <div class="modal-body">
-                    <div class="form-group">
+                    <div class="form-group" >
                       <span class="hidden" id="save_id"></span>
                       <span class="hidden" id="save_row"></span>
                       <div class="delete_msg">
                       </div>
-                      
-                      <form id='form_create_cauhoi' class=form form-horizontal>
-                      {{ method_field('POST') }}
 
-                      <br>
-                          <label for="cua_hoi">Câu hỏi :</label>
-                            <input type="hidden" id="id_baithi" value="{{$baitrac->id}}">
-                            <textarea id="cau_hoi" name="cua_hoi" style="resize:none" cols="100" rows="20" class="form-control"></textarea>
-                        <br>
-                        <div class="input-group input-group-lg">
+                      <form id='form_create_cauhoi'>
+                      {{ method_field('POST') }}
+                      <div class="input-group input-group-lg" style="width: 100%;">
+                        <label for="cua_hoi">Câu hỏi :</label>
+                        <div>
+                          <input type="hidden" id="id_baithi" value="{{$baitrac->id}}">
+                          <textarea  style="height: 200px;width: 570px;" cols="50" id="cau_hoi"></textarea>
+                        </div>
+                      </div>
+                        <div class="input-group input-group-lg" style="width: 100%">
                           <label for="cau_tla">Câu trả lời A :</label>
                           <div>
-                            <textarea id="cau_tla" name="cau_tla" style="resize:none" cols="100" class="form-control" rows="3"></textarea>
+                            <textarea id="cau_tla" name="cau_tla" style="resize:none" cols="100" class="form-control" rows="3" ></textarea>
                           </div>
                         </div>
                         <br>

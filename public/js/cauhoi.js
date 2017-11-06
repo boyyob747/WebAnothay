@@ -28,6 +28,8 @@ $(document).on('click', '#btn_add_cauhoi', function() {
           'X-CSRF-Token': $('meta[name="csrf_token"]').attr('content')
       }
     });
+      var nicE = new nicEditors.findEditor('cau_hoi');
+      question = nicE.getContent();
       var url = $(this).attr("data-link");
       var token = $(this).data('token');
             $.ajax({
@@ -35,7 +37,7 @@ $(document).on('click', '#btn_add_cauhoi', function() {
                 url: url,
                 data: {
                   '_token': token,
-                  'cau_hoi': $('#cau_hoi').val(),
+                  'cau_hoi': question,
                   'cau_tla': $('#cau_tla').val(),
                   'cau_tlb': $('#cau_tlb').val(),
                   'cau_tlc': $('#cau_tlc').val(),

@@ -12,30 +12,27 @@
       <div class="panel-heading"><b>Câu hỏi : {{$row}}</b></div>
       <div class="panel-body">
         <blockquote>
-          <p>{{$cauhoi->cau_hoi}}</p>
+          <p>{!!$cauhoi->cau_hoi!!}</p>
         </blockquote>
       <div class="list-group">
     <div class="list-group-item">
-        <input type="radio" name="radio{{$row}}" id="radio1" value="0"/>
-        <label for="radio1">{{$cauhoi->cautl_a}}</label>
+        <label> <input type="radio" name="radio{{$row}}" id="radio1" value="0"/>a. {{$cauhoi->cautl_a}}</label>
     </div>
     <div class="list-group-item">
-        <input type="radio" name="radio{{$row}}" id="radio2" value="1"/>
-        <label for="radio2">{{$cauhoi->cautl_b}}</label>
+        <label> <input type="radio" name="radio{{$row}}" id="radio2" value="1"/>b. {{$cauhoi->cautl_b}}</label>
     </div>
     <div class="list-group-item">
-        <input type="radio" name="radio{{$row}}" id="radio3" value="2"/>
-        <label for="radio3">{{$cauhoi->cautl_c}}</label>
+        <label> <input type="radio" name="radio{{$row}}" id="radio3" value="2"/>c. {{$cauhoi->cautl_c}}</label>
     </div>
     <div class="list-group-item">
-        <input type="radio" name="radio{{$row}}" id="radio4" value="3"/>
-        <label for="radio4">{{$cauhoi->cautl_d}}</label>
+        <label> <input type="radio" name="radio{{$row}}" id="radio4" value="3"/>d. {{$cauhoi->cautl_d}}</label>
     </div>
       </div>
       <br>
         </div>
       </div>
       @endforeach
+      <button class="btn btn-info">Submit</button>
     </form>
 </div>
 @stop

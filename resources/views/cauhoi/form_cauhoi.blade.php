@@ -40,7 +40,7 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Câu hỏi</th>
+          <th >Câu hỏi</th>
           <th>Câu trả lời 1</th>
           <th>Câu trả lời 2</th>
           <th>Câu trả lời 3</th>
@@ -55,7 +55,7 @@
         <?php ++$row; ?>
         <tr class="item" >
           <th scope="row">{{$row}}</th>
-          <td>{{$cauhoi->cau_hoi}}</td>
+          <td>{!!$cauhoi->cau_hoi!!}</td>
           <td>{{$cauhoi->cautl_a}}</td>
           <td>{{$cauhoi->cautl_b}}</td>
           <td>{{$cauhoi->cautl_c}}</td>
