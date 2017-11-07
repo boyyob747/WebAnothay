@@ -1,14 +1,11 @@
-@extends('layouts.main')
-@section('title','Lớp học phần')
-@section('content')
 {!! Html::script('js/lambai.js') !!}
+{!! Html::style('bootstrap/css/bootstrap.min.css') !!}
+{!! Html::style('css/custom.css') !!}
+{!! Html::script('js/jquery.min.js') !!}
+{!! Html::script('js/custom.js') !!}
+{!! Html::style('awesome/css/font-awesome.min.css') !!}
 <div id="count_time"></div>
-<div class="container-fluid col-md-8 col-md-offset-2">
-  <ol class="breadcrumb">
-  <li><a href="{{url('/getthongtinlopsv')}}">Lớp học phần</a></li>
-  <li><a href="{{url('/home/getdsbaitap',session('lophoc_id'))}}">Dách sách bài tập</a></li>
-  <li class="active">Dách sách bài trắc nghiệm</li>
-  </ol>
+<div class="container-fluid col-md-8 col-md-offset-2" style="margin-top:2%">
   <div id="ketquadiv" hidden="true" class="panel panel-primary">
   <div class="panel-heading"><b>Kết quả</b></div>
   <div class="panel-body">
@@ -18,7 +15,7 @@
     <form id="form_baitap">
       {{ method_field('POST') }}
       <input type="hidden" id="_token" name="_token">
-      <input type="hidden" id="isThi" name="isThi" value="0">
+      <input type="hidden" id="isThi" name="isThi" value="1">
       <input type="hidden" id="id_baithi" name="id_baithi" value="{{$cauhois->first()->id_baithi}}" name="id_cauhoi">
       <?php $row = 0; ?>
       @foreach($cauhois as $cauhoi)
@@ -48,9 +45,7 @@
       </div>
       @endforeach
       <div class="text-center">
-        <button type="button" data-link="{{ url('/home/getketqua') }}"  data-token="{{ csrf_token() }}" id="btn_submit_lambaitap" class="btn btn-info btn-block">Submit</button>
+        <button type="button" data-link="{{ url('/home/getketqua') }}"  data-token="{{ csrf_token() }}" onclick="getKQ()" id="btn_submit_lambaitap" class="btn btn-info btn-block">Submit</button>
       </div>
-
     </form>
 </div>
-@stop

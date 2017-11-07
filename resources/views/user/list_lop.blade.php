@@ -36,12 +36,16 @@
             <td>{{$thongtinlophocphan->lophocphan->monhoc->monhoc}}</td>
             <td>{{$thongtinlophocphan->lophocphan->teacher->user->name}}</td>
             <td>{{$thongtinlophocphan->nhom_thi}}</td>
+            @if($thongtinlophocphan->diem < 0)
             <td>chưa có điểm</td>
+            @else
+            <td>{{$thongtinlophocphan->diem}}</td>
+            @endif
             <td><a href="{{url('/home/getdsbaitap',$thongtinlophocphan->lophocphan->id)}}" class="btn btn-primary">Click đây để xem bài tập</a></td>
             @if($thongtinlophocphan->state == 0)
             <td>không phải giờ thi</td>
             @else
-            <td><a href="#" class="btn btn-danger">Click đây để làm thi</a></td>
+            <td><a href="{{url('/home/lambaithi',$thongtinlophocphan->lophocphan->id)}}" onclick="return popitup(this);" class="btn btn-danger">Click đây để làm thi</a></td>
             @endif
           @endforeach
             </tbody>

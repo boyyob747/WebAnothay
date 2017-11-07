@@ -4,6 +4,7 @@
 <html>
 <head>
   <title>@yield('title')</title>
+  {!! Html::script('js/nicEdit.js') !!}
   {!! Html::style('bootstrap/css/bootstrap.min.css') !!}
   {!! Html::style('css/custom.css') !!}
   {!! Html::style('css/dataTables.bootstrap.min.css') !!}

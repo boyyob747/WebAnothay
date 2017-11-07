@@ -82,6 +82,40 @@ class BaiTracNgiemController extends Controller
         }
 
     }
+    public function lamBaiThi($id)//id = $thongtinlophocphan->lophocphan->id
+    {
+      $baitracs = Baitracnghiem::where('lophoc_id', $id)->where('diemcua', 1)->get();
+      session(['lophoc_id' => $id ] );
+      if($baitracs->isEmpty())
+      return back()->with('error_no_bai_tap','Chưa có bài tập của môn này');
+      else {
+        $baitrac = $baitracs->first();
+        $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $baitracs->first()->id)->get();
+        $duration = $baitrac->duration;
+        $student = Student::where('user_id', Auth::user()->id)->get()->first();
+        $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
+        session(['id_thongtin' => $thongtinlophocphan->id ] );
+        if($thongtinlophocphan->end_time == null)
+        {
+          date_default_timezone_set('Asia/Bangkok');
+          $timenow = date("Y-m-d H:i:s");
+          $endtime = date("Y-m-d H:i:s",strtotime('+'.$duration.'minutes',strtotime($timenow)));
+          session(['end_time' => $endtime ] );
+          $thongtinlophocphan->end_time = $endtime;
+          $thongtinlophocphan->save();
+        }
+        else {
+          session(['end_time' => $thongtinlophocphan->end_time] );
+        }
+        if($cauhois->isEmpty())
+        return back()->with('error_no_bai_tap','Chưa có câu hỏi của bài này');
+        else {
+          $data['lophocphan'] = 'class="active"';
+          $data['baitrac'] = $baitrac;
+          return view('user.lambaithi',['cauhois' => $cauhois],$data);
+        }
+      }
+    }
     public function lamBaitap($id) //id = $baitrac->id
     {
         $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $id)->get();
@@ -89,20 +123,11 @@ class BaiTracNgiemController extends Controller
         $duration = $baitrac->duration;
         $student = Student::where('user_id', Auth::user()->id)->get()->first();
         $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
-        //for thi just test
         session(['id_thongtin' => $thongtinlophocphan->id ] );
-        // if($thongtinlophocphan->end_time == null)
-        // {
           date_default_timezone_set('Asia/Bangkok');
           $timenow = date("Y-m-d H:i:s");
           $endtime = date("Y-m-d H:i:s",strtotime('+'.$duration.'minutes',strtotime($timenow)));
           session(['end_time' => $endtime ] );
-        //   $thongtinlophocphan->end_time = $endtime;
-        //   $thongtinlophocphan->save();
-        // }
-        // else {
-        //   session(['end_time' => $thongtinlophocphan->end_time] );
-        // }
         if($cauhois->isEmpty())
         return back()->with('error_no_bai_tap','Chưa có câu hỏi của bài này');
         else {
@@ -130,6 +155,32 @@ class BaiTracNgiemController extends Controller
           }
 	        else
 		      echo gmdate("H:i:s",$diffsec);
+    }
+    public function getKetQua(Request $request)
+    {
+      $name = Auth::user()->name;
+      $id_baithi = $request->input('id_baithi');
+      $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $id_baithi)->get();
+      $diem = 0;
+      $count_cauhoi = count($cauhois);
+      foreach ($cauhois as $cauhoi ) {
+        $cautl = $request->input('radio'.$cauhoi->id);
+        if(Hash::check($cautl, $cauhoi->cau_tl)){
+          $diem = $diem + 1;
+        }
+      }
+      if($request->input('isThi') == 1){
+          $id = Auth::user()->id;
+          $student = Student::where('user_id', $id)->get()->first();
+          $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
+          $thongtinlophocphan->diem = $diem;
+          $thongtinlophocphan->state = 0;
+          $thongtinlophocphan->save();
+      }
+      echo $title = "<p><b>Kết quả ".$cauhois->first()->baitracnghiem->duration." phút ,".$cauhois->first()->baitracnghiem->title."</b></p>";
+      echo "<p>Tên : ".$name."</p>";
+      echo "<p>Kết quả : ".$diem."/".$count_cauhoi."</p>";
+      echo "<p>Điểm : ".($diem*10)/$count_cauhoi."</p>";
     }
     /**
      * Show the form for editing the specified resource.
@@ -164,22 +215,5 @@ class BaiTracNgiemController extends Controller
     {
         //
     }
-    public function getKetQua(Request $request)
-    {
-      $name = Auth::user()->name;
-      $id_baithi = $request->input('id_baithi');
-      $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $id_baithi)->get();
-      $diem = 0;
-      $count_cauhoi = count($cauhois);
-      foreach ($cauhois as $cauhoi ) {
-        $cautl = $request->input('radio'.$cauhoi->id);
-        if(Hash::check($cautl, $cauhoi->cau_tl)){
-          $diem = $diem + 1;
-        }
-      }
-      echo $title = "<p><b>Kết quả ".$cauhois->first()->baitracnghiem->duration." phút ,".$cauhois->first()->baitracnghiem->title."</b></p>";
-      echo "<p>Tên : ".$name."</p>";
-      echo "<p>Kết quả : ".$diem."/".$count_cauhoi."</p>";
-      echo "<p>Điểm : ".($diem*10)/$count_cauhoi."</p>";
-    }
+
 }

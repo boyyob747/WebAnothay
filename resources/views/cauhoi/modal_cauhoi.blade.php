@@ -1,3 +1,4 @@
+
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="modal" id="modalCauhoi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
@@ -19,14 +20,13 @@
                       <span class="hidden" id="save_row"></span>
                       <div class="delete_msg">
                       </div>
-
                       <form id='form_create_cauhoi'>
                       {{ method_field('POST') }}
                       <div class="input-group input-group-lg" style="width: 100%;">
                         <label for="cua_hoi">Câu hỏi :</label>
                         <div>
                           <input type="hidden" id="id_baithi" value="{{$baitrac->id}}">
-                          <textarea  style="height: 200px;width: 570px;" cols="50" id="cau_hoi"></textarea>
+                          <textarea  style="height: 200px;width: 570px;" cols="50" name="cau_hoi" id="cau_hoi"></textarea>
                         </div>
                       </div>
                         <div class="input-group input-group-lg" style="width: 100%">

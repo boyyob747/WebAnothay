@@ -1,17 +1,3 @@
-<ol class="breadcrumb">
-<li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
-<li class="active">Dách sách sinh viên</li>
-</ol>
-<div class="panel panel-primary" >
-
-<div class="panel-heading text-left panel-relative">
-
-  <h2>Dánh sách sinhvien của lớp : {{$ten_lophocphans}}</h2>
-  <a href="{{url('/home/baitracnghiem',$thongtinlophocphans->first()->lophocphan_id)}}" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Dách sách bài trắc nghiệm
-  </a>
-  <button type="button" id="submit_table_danh_sach" style="float: right;" class="btn btn-danger" >Submit</button>
-</div>
-
 <div class="panel-body ">
   <div id="showsuccesbyself">
 
@@ -49,7 +35,6 @@
           <th>Nhóm thi</th>
           <th>Điểm</th>
           <th>Cho phép thi</th>
-          <th><input type="checkbox" id="allcb" name="allcb"/></th>
         </tr>
       </thead>
       <tbody id="tb_body_sv">
@@ -67,12 +52,14 @@
           <td>{{$thongtinlophocphan->diem}}</td>
           @endif
         <td>
-        Cho phép thi
+          @if($thongtinlophocphan->state == 0)
+          <buton class="btn btn-primary" id="btn_state_test" data-info="{{$thongtinlophocphan->id}},1" data-link="{{ url('/home/setStateTest') }}" data-token="{{ csrf_token() }}">Click để cho phép vào phòng thi</button>
+          @else
+          <buton class="btn btn-danger" id="btn_state_test" data-info="{{$thongtinlophocphan->id}},0" data-link="{{ url('/home/setStateTest') }}" data-token="{{ csrf_token() }}">Click để không cho phép vào phòng thi</button>
+          @endif
         </td>
-        <td>
-        <input type="checkbox" id="chothi_{{$thongtinlophocphan->id}}" value="0" name="cb1"/>
             @endforeach
           </tbody>
         </table>
       </div>
-    </div>
+</div>

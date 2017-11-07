@@ -1,3 +1,11 @@
+
+// //<![CDATA[
+//   bkLib.onDomLoaded(function() {
+//        new nicEditor().panelInstance('cau_hoi');
+//   });
+//   //]]>
+
+
 function popitup(link) {
   var w = window.open(link.href,
         link.target||"_blank",

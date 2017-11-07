@@ -13,7 +13,6 @@
 
 <div class="panel-body ">
   <div id="showsuccesbyself">
-
   </div>
   @if ($message = Session::get('usernameInsertError'))
   <div class="alert alert-danger alert-dismissable fade in">

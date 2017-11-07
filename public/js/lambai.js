@@ -15,6 +15,38 @@
 
 
 //
+function getKQ()
+{
+  var time = "<h3><span class='label label-danger'>stop</span></h3>"
+  document.getElementById("count_time").innerHTML=time;
+  clearInterval(myTimer);
+  $.ajaxSetup({
+  headers: {
+      'X-CSRF-Token': $('meta[name="csrf_token"]').attr('content')
+  }
+  });
+  var url = $('#btn_submit_lambaitap').attr("data-link");
+  var token = $('#btn_submit_lambaitap').data('token');
+  $('#_token').val(token);
+        $.ajax({
+            method: 'POST',
+            url: url,
+            data: $('#form_baitap').serialize()
+            ,beforeSend: function(xhr){
+              xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+            },success: function(data) {
+                if (data.errors){
+                }
+                 else {
+                    $('#form_baitap').hide();
+                    $("#ketquadiv").prop('hidden', false);
+                    var kq = "<blockquote><h1>"+data+"</h1></blockquote>";
+                    $('#ketqua').html(kq);
+                 }},error: function (xhr, status, error) {
+                   alert(xhr.responseText)
+                     }
+        });
+}
 $(document).on('click', '#btn_submit_lambaitap', function() {
   var time = "<h3><span class='label label-danger'>stop</span></h3>"
   document.getElementById("count_time").innerHTML=time;

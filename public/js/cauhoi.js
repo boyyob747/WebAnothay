@@ -1,3 +1,4 @@
+var area2;
 $(document).on('click', '.delete-modal-cauhoi', function() {
       var sizeOfCauHoi = $(this).data('info');
       var msg = "";
@@ -14,11 +15,11 @@ $(document).on('click', '#gg', function() {
   alert(question)
     });
 $(document).on('click', '#btn_add_cauhoi', function() {
+        area2 = new nicEditor({fullPanel : true}).panelInstance('cau_hoi');
         $('#btn_update_cauhoi').hide();
         $('#btn_delete_cauhoi').hide();
         $('.modal-title').text('Add');
         $('#modalCauhoi').modal('show');
-        $('#form_create_cauhoi').show();
         $('.delete_msg').hide();
         $('#btn_save_cauhoi').show();
     });
@@ -54,7 +55,7 @@ $(document).on('click', '#btn_add_cauhoi', function() {
                      else {
                        $msg = "<div class='alert alert-success alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Đã sửa thành công</strong></div>"
                        $('#showsuccesbyself').html($msg);
-                       $("#content-main").html(data);
+                       $("#form_cauhoi").html(data);
                       var table = $('#table_teachers').DataTable();
                       table.page('last').draw('page');
                      }},error: function (xhr, status, error) {
