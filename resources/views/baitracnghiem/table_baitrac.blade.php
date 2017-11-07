@@ -1,7 +1,7 @@
 <div class="container-fluid">
 <ol class="breadcrumb">
 <li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
-<li><a href="{{url()->previous()}}">Dách sách sinh viên</a></li>
+<li><a href="{{url('/home/thongtinlophocphans',session('lophocphan_id'))}}">Dách sách sinh viên</a></li>
 <li class="active">Dách sách bài trắc nghiệm</li>
 </ol>
 <div class="panel panel-primary" >
@@ -11,14 +11,7 @@
   <h2>Dánh sách sinhvien của lớp : </h2>
   <button class="btn btn-success" name="btn_modal_tracngiem" id="btn_modal_tracngiem"><i class="fa fa-plus" aria-hidden="true"></i> Tạo bài trắc nghiệm
   </button>
-  <div class="btn-group">
-  <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <i class="fa fa-bars" aria-hidden="true"></i> <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="{{ action('TeachersController@deleteAll','0')}}" onclick='return confirm("Bạn có thực sự muốn xóa tất cả bảng sinh viên không?")'>Xóa tất cả bảng giáo viên</a></li>
-  </ul>
-  </div>
+
   <button type="button" id="submit_table_danh_sach" style="float: right;" class="btn btn-danger" >Submit</button>
 </div>
 
@@ -55,6 +48,7 @@
           <th>Tên bài trắc nghiệm</th>
           <th>Điểm</th>
           <th>Xem</th>
+          <th>Sửa</th>
           <th>Xóa</th>
         </tr>
       </thead>
@@ -77,10 +71,15 @@
           @endif
           <td><a href="{{ url ('/home/cauhoi',$baitrac->id)}}" class="delete-modal-sinhvien btn btn-warning">
             <span class="glyphicon glyphicon-eye-open"></span></a></td>
+            <td><button class="edit-modal-sinhvien btn btn-info"
+              data-info="">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button></td>
       <td><button class="delete-modal-sinhvien btn btn-danger"
         data-info="">
         <span class="glyphicon glyphicon-trash"></span>
       </button></td>
+
             @endforeach
           </tbody>
         </table>

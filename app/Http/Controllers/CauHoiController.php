@@ -71,6 +71,7 @@ class CauHoiController extends Controller
     public function show($id)
     {
       $baitracs = Baitracnghiem::where('id', $id)->get();
+      session(['id_baithi' => $id]);
       $data['lophocphan'] = 'class="active"';
       $data['baitrac'] = $baitracs->first();
       $cauhois = Cauhoi::where('id_baithi', $id)->get();

@@ -58,7 +58,7 @@
             <li <?php if(isset($lophocphan))
             {
               echo $lophocphan;
-            } ?>><a href="{{ action('LopHocPhanController@index')}}">Tạo lớp học phần</a></li>
+            } ?>><a href="{{ action('LopHocPhanController@index')}}">Lớp học phần</a></li>
           <?php
           }
           else { // admin

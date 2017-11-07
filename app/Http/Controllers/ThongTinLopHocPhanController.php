@@ -49,6 +49,7 @@ class ThongTinLopHocPhanController extends Controller
     public function show($id)
     {
         $thongtinlophocphans = Thongtinlophocphan::where('lophocphan_id', $id)->get();
+        session(['lophocphan_id' => $id ] );
         $data['lophocphan'] = 'class="active"';
         $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
         return view('thongtinlophocphan.index',['thongtinlophocphans' => $thongtinlophocphans],$data);

@@ -1,13 +1,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <div class="modal" id="modalCauhoi" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-     <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
-     //<![CDATA[
-       bkLib.onDomLoaded(function() {
-            new nicEditor().panelInstance('cau_hoi');
-       });
-       //]]>
-     </script>
+
     <div class="vertical-alignment-helper">
         <div class="modal-dialog vertical-align-center">
             <div class="modal-content">

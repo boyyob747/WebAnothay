@@ -8,6 +8,6 @@ class Cauhoi extends Model
 {
   public function baitracnghiem()
   {
-    return $this->belongsTo('App\Baitracnghiem');
+    return $this->belongsTo('App\Baitracnghiem','id_baithi');
   }
 }

@@ -9,6 +9,7 @@ use App\Thongtinlophocphan;
 use App\Cauhoi;
 use App\Student;
 use Auth;
+use Hash;
 class BaiTracNgiemController extends Controller
 {
     /**
@@ -18,7 +19,7 @@ class BaiTracNgiemController extends Controller
      */
     public function index()
     {
-        //
+        return abort(404);
     }
 
     /**
@@ -72,6 +73,7 @@ class BaiTracNgiemController extends Controller
     public function getBaiTap($id)
     {
         $baitracs = Baitracnghiem::where('lophoc_id', $id)->where('diemcua', 0)->get();
+        session(['lophoc_id' => $id ] );
         if($baitracs->isEmpty())
         return back()->with('error_no_bai_tap','Chưa có bài tập của môn này');
         else {
@@ -82,7 +84,7 @@ class BaiTracNgiemController extends Controller
     }
     public function lamBaitap($id) //id = $baitrac->id
     {
-        $cauhois =  Cauhoi::where('id_baithi', $id)->get();
+        $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $id)->get();
         $baitrac = Baitracnghiem::where('id', $id)->where('diemcua', 0)->get()->first();
         $duration = $baitrac->duration;
         $student = Student::where('user_id', Auth::user()->id)->get()->first();
@@ -161,5 +163,23 @@ class BaiTracNgiemController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function getKetQua(Request $request)
+    {
+      $name = Auth::user()->name;
+      $id_baithi = $request->input('id_baithi');
+      $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $id_baithi)->get();
+      $diem = 0;
+      $count_cauhoi = count($cauhois);
+      foreach ($cauhois as $cauhoi ) {
+        $cautl = $request->input('radio'.$cauhoi->id);
+        if(Hash::check($cautl, $cauhoi->cau_tl)){
+          $diem = $diem + 1;
+        }
+      }
+      echo $title = "<p><b>Kết quả ".$cauhois->first()->baitracnghiem->duration." phút ,".$cauhois->first()->baitracnghiem->title."</b></p>";
+      echo "<p>Tên : ".$name."</p>";
+      echo "<p>Kết quả : ".$diem."/".$count_cauhoi."</p>";
+      echo "<p>Điểm : ".($diem*10)/$count_cauhoi."</p>";
     }
 }

@@ -1,8 +1,8 @@
 <div class="container-fluid">
 <ol class="breadcrumb">
-<li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
-<li><a href="">Dách sách sinh viên</a></li>
-<li><a href="">Dách sách bài trắc nghiệm</a></li>
+  <li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
+  <li><a href="{{url('/home/thongtinlophocphans',session('lophocphan_id'))}}">Dách sách sinh viên</a></li>
+  <li><a href="{{url('/home/baitracnghiem',session('id_baithi'))}}">Dách sách bài trắc nghiệm</a></li>
 <li class="active">Dách sách câu hỏi</li>
 </ol>
 <div class="panel panel-primary" >

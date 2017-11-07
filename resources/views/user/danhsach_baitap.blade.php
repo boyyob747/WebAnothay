@@ -2,6 +2,10 @@
 @section('title','Dách sách bài tập')
 @section('content')
 <div class="container-fluid col-md-10 col-md-offset-1">
+  <ol class="breadcrumb">
+  <li><a href="{{url('/getthongtinlopsv')}}">Lớp học phần</a></li>
+  <li class="active">Dách sách bài tập</li>
+  </ol>
   <div class="panel panel-primary">
   <div class="panel-heading">Dách sách bài tập của : ....</div>
   <div class="panel-body">
