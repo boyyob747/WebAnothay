@@ -18,6 +18,7 @@ Auth::routes();
 
 Route::get('/home', 'PagesController@index')->name('home');
 Route::resource('/home/teacher','TeachersController');
+Route::get('/autocompleteteacher', 'TeachersController@autocomplete');
 // Route::post('import','FileExcelController@import');
 Route::resource('/home/student','StudentsController');
 Route::resource('/home/lophocphan','LopHocPhanController');//BaiTracNghiem

@@ -35,12 +35,9 @@
           @guest
 
           @else
-          <?php
-          $user = Auth::user();
-          $state = Auth::user()->state;
-          if ($state == 0)
-          {
-            ?>
+
+          @if(Auth::user()->state == 0)
+
             <li <?php if(isset($lophocphan))
             {
               echo $lophocphan;
@@ -53,26 +50,25 @@
             {
               echo $diem;
             } ?>><a href="{{ action('PagesController@about')}}">Điểm thi</a></li>
-          <?php }
-          else if ($state == 1) // giao vien
-          { ?>
+          @elseif(Auth::user()->state == 1)
             <li <?php if(isset($lophocphan))
             {
               echo $lophocphan;
             } ?>><a href="{{ action('LopHocPhanController@index')}}">Lớp học phần</a></li>
-          <?php
-          }
-          else { // admin
-          ?>
+          @else
           <li <?php if(isset($giaovien))
           {
             echo $giaovien;
-          } ?>><a href="{{ action('TeachersController@index')}}">Giáo viên</a></li>
+          } ?>><a href="{{ action('TeachersController@index')}}">Quản lý giáo viên</a></li>
           <li <?php if(isset($sinhvien))
           {
             echo $sinhvien;
-          } ?>><a href="{{ action('StudentsController@index')}}">Sinh viên</a></li>
-        <?php } ?>
+          } ?>><a href="{{ action('StudentsController@index')}}">Quản lý sinh viên</a></li>
+        <li <?php if(isset($lophocphan))
+        {
+          echo $lophocphan;
+        } ?>><a href="{{ action('LopHocPhanController@index')}}">Quản lý lớp học phần</a></li>
+          @endif
           @endguest
         </ul>
         <ul class="nav navbar-nav navbar-right">

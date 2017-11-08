@@ -9,7 +9,7 @@
 function popitup(link) {
   var w = window.open(link.href,
         link.target||"_blank",
-        'menubar=no,toolbar=no,location=no,directories=no,status=no,scrollbars=yes,resizable=no,dependent,width=800,height=620,left=0,top=0');
+        'location=no,toolbar=no,menubar=no,scrollbars=yes,resizable=yes,addressbar=0,titlebar=no,directories=no,channelmode=no,status=no,width=800,height=620,left=0,top=0');
   return w?false:true; // allow the link to work if popup is blocked
  }
 

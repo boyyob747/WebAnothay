@@ -46,6 +46,38 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
+                    <div id="add_current_bai">
+                      <hr>
+                      <br>
+                      <center><p>Hoặc chọn bai trac nghiệm đã tạo</p>
+                          <br>
+                          {!! Form::open(['method' => 'POST', 'url' => '/importsinhvien','id'  => 'id_form_excel','class' => 'form form-horizontal','enctype'=>'multipart/form-data']) !!}
+                          <div class="form-group">
+                          <?php
+                          $baitraccuagiaovien = array();
+                          if(isset($baitracsCuaTeacherArray)){
+                            $i = 0;
+                            foreach ($baitracsCuaTeacherArray as $baitracsCuaTeacher) {
+                              $baitraccuagiaovien [$baitracsCuaTeacher->id] = $baitracsCuaTeacher->title;
+                              $i++;
+                            }
+                            if($i == 0){
+                              $baitraccuagiaovien[0] = 'Chưa có bài đã tạo';
+                            }
+                          }
+                          ?>
+                          <div class="input-group input-group-lg">
+                                  <span class="input-group-addon" id="sizing-addon1">Chọn bài</span>
+                                  {{ Form::select('number', $baitraccuagiaovien, null, ['class' => 'form-control']) }}
+                          </div>
+                          </div>
+                      </center>
+                      <br>
+                      <div class="text-center">
+                          {!! Form::submit('Upload',['class' => 'btn btn-success']) !!}
+                      </div>
+                       {!! Form::close() !!}
+                    </div>
                 </div>
                 <div class="modal-footer">
 

@@ -18,7 +18,11 @@ class ThongTinLopHocPhanController extends Controller
      */
     public function index()
     {
-        //
+        if(Auth::user()->state == 3){
+
+        }else {
+          return abort(404);
+        }
     }
 
     /**
@@ -50,11 +54,19 @@ class ThongTinLopHocPhanController extends Controller
      */
     public function show($id)
     {
-        $thongtinlophocphans = Thongtinlophocphan::where('lophocphan_id', $id)->get();
-        session(['lophocphan_id' => $id ] );
-        $data['lophocphan'] = 'class="active"';
-        $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
-        return view('thongtinlophocphan.index',['thongtinlophocphans' => $thongtinlophocphans],$data);
+      $thongtinlophocphans = Thongtinlophocphan::where('lophocphan_id', $id)->get();
+      session(['lophocphan_id' => $id ] );
+      $data['lophocphan'] = 'class="active"';
+      $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
+        if(Auth::user()->state == 1){
+          return view('thongtinlophocphan.index',['thongtinlophocphans' => $thongtinlophocphans],$data);
+        }else if (Auth::user()->state == 3){
+          return view('admin.ds_sv',['thongtinlophocphans' => $thongtinlophocphans],$data);
+        }else{
+          return abort(404);
+        }
+
+
     }
 
     public function getThongTinLopSV()

@@ -10,6 +10,8 @@ use App\Cauhoi;
 use App\Student;
 use Auth;
 use Hash;
+use App\Teacher;
+use App\Lophocphan;
 class BaiTracNgiemController extends Controller
 {
     /**
@@ -66,8 +68,21 @@ class BaiTracNgiemController extends Controller
     public function show($id)
     {
       $baitracs = Baitracnghiem::where('lophoc_id', $id)->get();
+      $user_id = Auth::user()->id;
+      $id_teacher = Teacher::where('user_id', $user_id)->get()->first()->id;
+      $lophocs = Lophocphan::where('teacher_id', $id_teacher)->get();
+      $baitracsCuaTeacherArray = array();
+      foreach ($lophocs as $lophoc) {
+        $baitracCuaTeachers = Baitracnghiem::where('lophoc_id', $lophoc->id)->get();
+        if(!$baitracCuaTeachers->isEmpty()){
+          foreach ($baitracCuaTeachers as $baitracCuaTeacher) {
+            $baitracsCuaTeacherArray [] = $baitracCuaTeacher ;
+          }
+        }
+      }
       $data['lophocphan'] = 'class="active"';
       $data['lophocphan_id'] = $id;
+      $data['baitracsCuaTeacherArray'] = $baitracsCuaTeacherArray;
       return view('baitracnghiem.index',['baitracs' => $baitracs],$data);
     }
     public function getBaiTap($id)
@@ -94,6 +109,8 @@ class BaiTracNgiemController extends Controller
         $duration = $baitrac->duration;
         $student = Student::where('user_id', Auth::user()->id)->get()->first();
         $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
+        if($thongtinlophocphan->state == 0)
+        return abort(404);
         session(['id_thongtin' => $thongtinlophocphan->id ] );
         if($thongtinlophocphan->end_time == null)
         {
@@ -173,7 +190,7 @@ class BaiTracNgiemController extends Controller
           $id = Auth::user()->id;
           $student = Student::where('user_id', $id)->get()->first();
           $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
-          $thongtinlophocphan->diem = $diem;
+          $thongtinlophocphan->diem = ($diem*10)/$count_cauhoi;
           $thongtinlophocphan->state = 0;
           $thongtinlophocphan->save();
       }

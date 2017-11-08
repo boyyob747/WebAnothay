@@ -10,7 +10,8 @@ use App\User;
 use Auth;
 use App\Http\Requests\TeacherRequest;
 use PhpParser\Node\Expr\Array_;
-
+use Input;
+use Response;
 class TeachersController extends Controller
 {
     /**
@@ -186,5 +187,20 @@ class TeachersController extends Controller
             }
             return back()->with('success','Đã xáo tất cả thánh công');
           }
+    }
+    public function autocomplete(){
+	       $term = Input::get('term');
+	      $results = array();
+        $queries = DB::table('users')
+        ->where('name', 'LIKE', '%'.$term.'%')
+        ->where('state','1')->take(10)->get();
+	        foreach ($queries as $query)
+	         {
+	             $results[] = ['id' => $query->id, 'value' => $query->name];
+	         }
+           if($queries->isEmpty()){
+             $results[] = ['id' => 0, 'value' => 'Không có giảng viên này'];
+           }
+           return Response::json($results);
     }
 }

@@ -1,8 +1,3 @@
-<div class="container-fluid">
-<div class="panel panel-primary" >
-<div class="panel-heading text-left panel-relative"><h2>Dánh sách lớp học phần của giảng viên {{ $tengiaovien}}</h2>
-</div>
-
 <div class="panel-body ">
   <div id="showsuccesbyself">
 
@@ -32,32 +27,31 @@
     <table class="table table table-hover" id="table_teachers">
       <thead>
         <tr>
-          <th>#</th>
+          <th>STT</th>
           <th>Tên</th>
-          <th>Món học</th>
-          <th>Dánh sách sinh viên</th>
+          <th>Số thẻ sinh viên</th>
+          <th>Điện thoại</th>
+          <th>Lớp sinh hoạt</th>
+          <th>Nhóm thi</th>
+          <th>Điểm</th>
         </tr>
       </thead>
       <tbody id="tb_body_sv">
-        <?php $row = 0;
-        ?>
-        @foreach($lophocphans as $lophocphan)
-        <?php $row = $row + 1; ?>
-        <tr class="item{{$lophocphan->id}}">
-          <th scope="row"> {{$row}}</th>
-          <td>{{$lophocphan->ten_lophocphans}}</td>
-          <td>{{$lophocphan->monhoc->monhoc}}</td>
-          <?php if(isset($datathongtin[$row-1]))
-          { ?>
-            <td><a href="{{url('home/thongtinlophocphans',$datathongtin[$row-1]->first()->lophocphan_id)}}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>  Xem Dánh sách sinh viên</a></td>
-          <?php }else{
-          ?>
-          <td>Chưa có dánh sách sinh viên</td>
-          <?php }?>
+        @foreach($thongtinlophocphans as $thongtinlophocphan)
+        <tr class="item{{$thongtinlophocphan->id}}">
+          <th scope="row">{{$thongtinlophocphan->STT}}</th>
+          <td>{{$thongtinlophocphan->student->user->name}}</td>
+          <td>{{$thongtinlophocphan->student->mssv}}</td>
+          <td>{{$thongtinlophocphan->student->sodienthoai}}</td>
+          <td>{{$thongtinlophocphan->student->lop}}</td>
+          <td>{{$thongtinlophocphan->nhom_thi}}</td>
+          @if($thongtinlophocphan->diem < 0)
+          <td>Chưa thi</td>
+          @else
+          <td>{{$thongtinlophocphan->diem}}</td>
+          @endif
             @endforeach
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
-  </div>
+</div>

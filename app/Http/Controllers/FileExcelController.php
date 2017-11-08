@@ -123,7 +123,7 @@ class FileExcelController extends Controller
                           'state' => 0,
                           'username' => $value['mssv'],
                           'email' =>  $value['email'],
-                          'password' => bcrypt($value['ngaysinh']),
+                          'password' => bcrypt($value['mssv']),
                       ]);
                       $sinhvien->user_id = $user->id;
                       $sinhvien->save();
