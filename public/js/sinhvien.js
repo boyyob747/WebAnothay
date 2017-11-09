@@ -42,6 +42,8 @@ $(document).on('click', '#btn_add_sinhvien', function() {
                        $('#showsuccesbyself').html($msg);
                        $("#content-main").html(data);
                         $('#table_teachers').DataTable();
+                        var table = $('#table_teachers').DataTable();
+                         table.page('last').draw('page');
                      }},error: function (xhr, status, error) {
                        $('#modalAddSinhvien').modal('show');
                        var err = eval("(" + xhr.responseText + ")");

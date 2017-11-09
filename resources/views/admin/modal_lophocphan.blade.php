@@ -88,8 +88,9 @@
                           </div>
                       </center>
                       <br>
-                      <div class="text-center">
-                          {!! Form::submit('Upload',['class' => 'btn btn-success']) !!}
+                      <div class="form-group text-center">
+                          {!! Form::submit('Upload',['class' => 'btn btn-success','id' => 'submit_exel','style' => 'display:none']) !!}
+                          <buton class="btn btn-success" id="btn_upload">Upload</button>
                       </div>
                        {!! Form::close() !!}
                     </div>

@@ -10,7 +10,18 @@ $(document).on('click', '#btn_add_lophocphan', function() {
         $('#btn_save_lophocphan').show();
           $('#add_with_excel').hide();
       //  fillmodalDataSinhVien(['','','','','','','Công nghệ thông tin','','','']);
-    });
+    });//btn_upload
+
+    $(document).on('click', '#btn_upload', function() {
+            var file = $('#file2').val();
+            if(file == '' || file == null){
+              $('#modalLopHocPhanSinhvien').modal('show');
+              it = "<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Lỗi : Phải nhập file</strong></div>"
+               $('.div_error').html(it);
+            }else{
+            $( "#id_form_excel" ).submit();
+            }
+        });
     $(document).on('click', '#btn_xoa_lophoc', function() {
       $('#btn_update_sinhvien').hide();
       $('#btn_save_lophocphan').hide();

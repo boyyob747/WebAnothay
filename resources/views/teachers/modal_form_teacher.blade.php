@@ -13,22 +13,6 @@
                     echo $teacherforedit->ngaysinh; ?></h4>
                     <div class="div_error">
                     </div>
-                    <!-- @if($errors-> any())
-                    @if(!isset($backFormUpdate))
-
-                    <ul class="alert alert-danger">
-                        @foreach($errors->all() as $error)
-                            <li>{{$error}}</li>
-                        @endforeach
-                    </ul>
-                    <script>
-                        $(document).ready(function () {
-                            $('#modalEdit').modal('hide')
-                            $('#modalAdd').modal('show')
-                        });
-                    </script>
-                    @endif
-                    @endif -->
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -106,7 +90,7 @@
                         <br>
                         <div class="text-right">
                           <button id="btn_acction" class="btn btn-primary"  data-link="{{ url('/home/teacher/') }}" data-token="{{ csrf_token() }}" data-dismiss="modal" name="close_form"> Update</button>
-                          <button id="btn_save_teacher" class="btn btn-primary"  data-dismiss="modal" name="close_form"> Save</button>
+                          <button id="btn_save_teacher" class="btn btn-primary" data-link="{{ url('/home/teacher/') }}" data-token="{{ csrf_token() }}"  data-dismiss="modal" name="close_form"> Save</button>
                         </div>
                         {!! Form::close() !!}
                         <div id="add_with_excel">

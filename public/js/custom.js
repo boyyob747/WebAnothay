@@ -127,7 +127,57 @@ function fillmodalData(details){
             fillmodalData(['','','','','','Truong dai hoc bach khoa','Công nghệ thông tin','','','']);
         });
 
+    $(document).on('click', '#btn_save_teacher', function() {
+      $.ajaxSetup({
+      headers: {
+          'X-CSRF-Token': $('meta[name="csrf_token"]').attr('content')
+      }
+    });
+      var url = $(this).attr("data-link");
+      var token = $(this).data('token');
+            $.ajax({
+                method: 'POST',
+                url: url,
+                data: {
+                  '_token': token,
+                  'username': $('#username').val(),
+                  'password': $('#password').val(),
+                  'name': $('#name').val(),
+                  'email': $('#email').val(),
+                  'ngaysinh': $('#datepicker').val(),
+                  'sodienthoai': $('#sodienthoai').val(),
+                  'truong': $('#truong').val(),
+                  'khoa': $('#khoa').val(),
+                  '_method' : 'POST'
+                },beforeSend: function(xhr){
+                  xhr.setRequestHeader('X-CSRF-TOKEN', $("#token").attr('content'));
+                },success: function(data) {
+                    if (data.errors){
+                    }
+                     else {
+                       $msg = "<div class='alert alert-success alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Đã sửa thành công</strong></div>"
+                       $('#showsuccesbyself').html($msg);
+                       $("#content-main").html(data);
+                        $('#table_teachers').DataTable();
+                        var table = $('#table_teachers').DataTable();
+                         table.page('last').draw('page');
+                     }},error: function (xhr, status, error) {
+                       alert(xhr.responseText)
+                       $('#modalAdd').modal('show');
+                       var err = eval("(" + xhr.responseText + ")");
+                       var msg = ""
+                       var it = ""
+                       var data = jQuery.parseJSON(JSON.stringify(err.errors));
+                         $.each(data, function(key, item)
+                         {
+                             it = "<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Lỗi : </strong> "+item+"</div>"
+                             msg = msg + it ;
+                           });
+                        $('.div_error').html(msg);
 
+                         }
+            });
+    });
     $(document).on('click', '#btn_acction', function() {
       var id = $("#id").val();
       var url = '/home/teacher/'+id;

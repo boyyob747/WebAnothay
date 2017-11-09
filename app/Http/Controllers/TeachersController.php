@@ -25,7 +25,7 @@ class TeachersController extends Controller
      }
     public function index()
     {
-        $users = array();
+        //$users = array();
         $data['giaovien'] = 'class="active"';
         $teachers = Teacher::all();
         return view('teachers.teacher', ['teachers' => $teachers],$data);
@@ -65,7 +65,9 @@ class TeachersController extends Controller
         ]);
         $teacher->user_id = $user->id;
         $teacher->save();
-        return redirect('home/teacher');
+        $data['giaovien'] = 'class="active"';
+        $teachers = Teacher::all();
+        return view('teachers.table_teacher', ['teachers' => $teachers],$data);
     }
     public function show($id)
     {

@@ -165,9 +165,6 @@ class BaiTracNgiemController extends Controller
 	        if ($diffsec  <= 0)
           {
             $id_thongtin = session('id_thongtin');
-            $thongtinlophocphan = Thongtinlophocphan::find($id_thongtin);
-            $thongtinlophocphan->end_time = null;
-            $thongtinlophocphan->save();
             echo 'stop';
           }
 	        else
@@ -192,6 +189,7 @@ class BaiTracNgiemController extends Controller
           $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
           $thongtinlophocphan->diem = ($diem*10)/$count_cauhoi;
           $thongtinlophocphan->state = 0;
+          $thongtinlophocphan->end_time = null;
           $thongtinlophocphan->save();
       }
       echo $title = "<p><b>Kết quả ".$cauhois->first()->baitracnghiem->duration." phút ,".$cauhois->first()->baitracnghiem->title."</b></p>";
