@@ -7,7 +7,7 @@
   <li class="active">Dách sách bài tập</li>
   </ol>
   <div class="panel panel-primary">
-  <div class="panel-heading">Dách sách bài tập của : ....</div>
+  <div class="panel-heading">Dách sách bài tập của môn : {{$baitracs->first()->lophocphan->ten_lophocphans}}</div>
   <div class="panel-body">
     @if ($message = Session::get('error_no_bai_tap'))
     <div class="alert alert-danger alert-dismissable fade in">

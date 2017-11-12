@@ -44,6 +44,7 @@
           <th>Câu trả lời 2</th>
           <th>Câu trả lời 3</th>
           <th>Câu trả lời 4</th>
+          <th>Sửa</th>
           <th>Xóa</th>
         </tr>
       </thead>
@@ -59,6 +60,10 @@
           <td>{{$cauhoi->cautl_b}}</td>
           <td>{{$cauhoi->cautl_c}}</td>
           <td>{{$cauhoi->cautl_d}}</td>
+          <td><button  class="edit-modal-sinhvien btn btn-info"
+            data-info="{{count($cauhois)}}">
+            <span class="glyphicon glyphicon-edit"></span>
+        </button></td>
         <td><button class="delete-modal-cauhoi btn btn-danger"
           data-info="{{count($cauhois)}}">
           <span class="glyphicon glyphicon-trash"></span>

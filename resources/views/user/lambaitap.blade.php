@@ -7,7 +7,7 @@
   <ol class="breadcrumb">
   <li><a href="{{url('/getthongtinlopsv')}}">Lớp học phần</a></li>
   <li><a href="{{url('/home/getdsbaitap',session('lophoc_id'))}}">Dách sách bài tập</a></li>
-  <li class="active">Dách sách bài trắc nghiệm</li>
+  <li class="active">Làm bài tập</li>
   </ol>
   <div id="ketquadiv" hidden="true" class="panel panel-primary">
   <div class="panel-heading"><b>Kết quả</b></div>

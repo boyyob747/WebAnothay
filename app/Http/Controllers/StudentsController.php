@@ -14,12 +14,20 @@ class StudentsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function __construct()
+     {
+       $this->middleware('auth');
+     }
     public function index()
     {
-      $users = array();
-      $data['sinhvien'] = 'class="active"';
-      $students = Student::all();
-      return view('sinhvien.sinhviens', ['students' => $students],$data);
+        if (Auth::user()->state == 3) {
+          $data['sinhvien'] = 'class="active"';
+          $students = Student::all();
+          return view('sinhvien.sinhviens', ['students' => $students],$data);
+        }else{
+          return abort(404);
+        }
+
     }
 
     /**

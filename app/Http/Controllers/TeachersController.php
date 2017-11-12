@@ -25,10 +25,14 @@ class TeachersController extends Controller
      }
     public function index()
     {
-        //$users = array();
-        $data['giaovien'] = 'class="active"';
-        $teachers = Teacher::all();
-        return view('teachers.teacher', ['teachers' => $teachers],$data);
+        if (Auth::user()->state == 3) {
+          $data['giaovien'] = 'class="active"';
+          $teachers = Teacher::all();
+          return view('teachers.teacher', ['teachers' => $teachers],$data);
+        }else{
+          return abort(404);
+        }
+
     }
 
     /**
