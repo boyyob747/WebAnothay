@@ -1,7 +1,7 @@
 <div class="container-fluid">
 <ol class="breadcrumb">
 <li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
-<li><a href="{{url('/home/thongtinlophocphans',session('lophocphan_id'))}}">Dách sách sinh viên</a></li>
+<li><a href="{{url('/home/thongtinlophocphans',session('lophoc_id'))}}">Dách sách sinh viên</a></li>
 <li class="active">Dách sách bài trắc nghiệm</li>
 </ol>
 <div class="panel panel-primary" >
@@ -12,7 +12,6 @@
   <button class="btn btn-success" name="btn_modal_tracngiem" id="btn_modal_tracngiem"><i class="fa fa-plus" aria-hidden="true"></i> Tạo bài trắc nghiệm
   </button>
 
-  <button type="button" id="submit_table_danh_sach" style="float: right;" class="btn btn-danger" >Submit</button>
 </div>
 
 <div class="panel-body ">
@@ -62,12 +61,8 @@
           <td>{{$baitrac->title}}</td>
           @if($baitrac->diemcua == 0)
           <td>Luyền tập không có điểm</td>
-          @elseif($baitrac->diemcua == 2)
-          <td>Điểm giữa kì</td>
           @elseif($baitrac->diemcua == 1)
-          <td>Điểm bài tập</td>
-          @elseif($baitrac->diemcua == 3)
-          <td>Điểm cuối kỳ</td>
+          <td>Điểm thi</td>
           @endif
           <td><a href="{{ url ('/home/cauhoi',$baitrac->id)}}" class="delete-modal-sinhvien btn btn-warning">
             <span class="glyphicon glyphicon-eye-open"></span></a></td>

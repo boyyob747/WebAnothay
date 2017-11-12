@@ -42,14 +42,6 @@
             {
               echo $lophocphan;
             } ?>><a href="{{ action('ThongTinLopHocPhanController@getThongTinLopSV')}}">Lớp học phần</a></li>
-            <li <?php if(isset($baitab))
-            {
-              echo $baitab;
-            } ?>><a href="{{ action('PagesController@about')}}">Bài tập</a></li>
-            <li <?php if(isset($diem))
-            {
-              echo $diem;
-            } ?>><a href="{{ action('PagesController@about')}}">Điểm thi</a></li>
           @elseif(Auth::user()->state == 1)
             <li <?php if(isset($lophocphan))
             {

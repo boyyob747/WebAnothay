@@ -55,7 +55,7 @@ class ThongTinLopHocPhanController extends Controller
     public function show($id)
     {
       $thongtinlophocphans = Thongtinlophocphan::where('lophocphan_id', $id)->get();
-      session(['lophocphan_id' => $id ] );
+      session(['lophoc_id' => $id ] );
       $data['lophocphan'] = 'class="active"';
       $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
         if(Auth::user()->state == 1){
