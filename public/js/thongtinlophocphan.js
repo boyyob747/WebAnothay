@@ -29,11 +29,11 @@ $(document).on('click', '#btn_state_test', function() {
                  if(value.state == 1){
                    state = "<buton class='btn btn-danger' id='btn_state_test' data-info='"+value.id+",0' "+
                    "data-link='"+value.url+"' "+
-                   "data-token="+value.token+">Click để không cho phép vào phòng thi</button>"
+                   "data-token="+value.token+">Không cho phép vào phòng thi</button>"
                  }else if(value.state == 0){
                    state = "<buton class='btn btn-primary' id='btn_state_test' data-info='"+value.id+",1' "+
                    "data-link='"+value.url+"' "+
-                   "data-token="+value.token+">Click để cho phép vào phòng thi</button>"
+                   "data-token="+value.token+">Cho phép vào phòng thi</button>"
                  }
 
                   $('.item' + value.id).replaceWith("<tr class='item"+value.id+"'><th scope='row'>"+value.STT+"</th>"

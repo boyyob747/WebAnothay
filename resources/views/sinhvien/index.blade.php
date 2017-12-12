@@ -18,7 +18,7 @@
         <div class="container">
             <div class="card card-container">
                 <span class="glyphicon glyphicon-list-alt"></span>
-                <center><h3>Đăng nhập để làm bài thi</h1></center>
+                <center><h3>Đăng nhập</h1></center>
                 <p id="profile-name" class="profile-name-card"></p>
                 <form class="form-signin" method="POST" action="{{ route('login') }}">
                     {{ csrf_field() }}

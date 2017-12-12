@@ -1,6 +1,6 @@
 <div class="container-fluid">
 <div class="panel panel-primary" >
-<div class="panel-heading text-left panel-relative"><h2>Dánh sách lớp học phần của giảng viên {{ $tengiaovien}}</h2>
+<div class="panel-heading text-left panel-relative"><h2>Danh sách lớp học phần của giảng viên {{ $tengiaovien}}</h2>
 </div>
 
 <div class="panel-body ">
@@ -34,8 +34,8 @@
         <tr>
           <th>#</th>
           <th>Tên</th>
-          <th>Món học</th>
-          <th>Dánh sách sinh viên</th>
+          <th>Môn học</th>
+          <th>Danh sách sinh viên</th>
         </tr>
       </thead>
       <tbody id="tb_body_sv">
@@ -49,10 +49,10 @@
           <td>{{$lophocphan->monhoc->monhoc}}</td>
           <?php if(isset($datathongtin[$row-1]))
           { ?>
-            <td><a href="{{url('home/thongtinlophocphans',$datathongtin[$row-1]->first()->lophocphan_id)}}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>  Xem Dánh sách sinh viên</a></td>
+            <td><a href="{{url('home/thongtinlophocphans',$datathongtin[$row-1]->first()->lophocphan_id)}}" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i>  Xem Danh sách sinh viên</a></td>
           <?php }else{
           ?>
-          <td>Chưa có dánh sách sinh viên</td>
+          <td>Chưa có danh sách sinh viên</td>
           <?php }?>
             @endforeach
           </tbody>

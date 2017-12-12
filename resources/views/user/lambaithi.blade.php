@@ -21,7 +21,7 @@
       @foreach($cauhois as $cauhoi)
       <?php ++$row; ?>
       <div class="panel panel-primary">
-      <div class="panel-heading"><b>Câu hỏi : {{$row}}</b><b style="float: right;">điểm :{{(1*10)/count($cauhois)}}</b></div>
+      <div class="panel-heading"><b>Câu hỏi : {{$row}}</b><b style="float: right;"></b></div>
       <div class="panel-body">
         <blockquote>
           <p>{!!$cauhoi->cau_hoi!!}</p>

@@ -195,7 +195,7 @@ class BaiTracNgiemController extends Controller
       echo $title = "<p><b>Kết quả ".$cauhois->first()->baitracnghiem->duration." phút ,".$cauhois->first()->baitracnghiem->title."</b></p>";
       echo "<p>Tên : ".$name."</p>";
       echo "<p>Kết quả : ".$diem."/".$count_cauhoi."</p>";
-      echo "<p>Điểm : ".($diem*10)/$count_cauhoi."</p>";
+      echo "<p>Điểm : ".sprintf("%.2f", ($diem*10)/$count_cauhoi)."</p>";
     }
     /**
      * Show the form for editing the specified resource.

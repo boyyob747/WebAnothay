@@ -53,9 +53,9 @@
           @endif
         <td>
           @if($thongtinlophocphan->state == 0)
-          <buton class="btn btn-primary" id="btn_state_test" data-info="{{$thongtinlophocphan->id}},1" data-link="{{ url('/home/setStateTest') }}" data-token="{{ csrf_token() }}">Click để cho phép vào phòng thi</button>
+          <buton class="btn btn-primary" id="btn_state_test" data-info="{{$thongtinlophocphan->id}},1" data-link="{{ url('/home/setStateTest') }}" data-token="{{ csrf_token() }}">Cho phép vào phòng thi</button>
           @else
-          <buton class="btn btn-danger" id="btn_state_test" data-info="{{$thongtinlophocphan->id}},0" data-link="{{ url('/home/setStateTest') }}" data-token="{{ csrf_token() }}">Click để không cho phép vào phòng thi</button>
+          <buton class="btn btn-danger" id="btn_state_test" data-info="{{$thongtinlophocphan->id}},0" data-link="{{ url('/home/setStateTest') }}" data-token="{{ csrf_token() }}">Không cho phép vào phòng thi</button>
           @endif
         </td>
             @endforeach
