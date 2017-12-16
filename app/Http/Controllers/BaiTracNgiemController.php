@@ -102,13 +102,13 @@ class BaiTracNgiemController extends Controller
       $baitracs = Baitracnghiem::where('lophoc_id', $id)->where('diemcua', 1)->get();
       session(['lophoc_id' => $id ] );
       if($baitracs->isEmpty())
-      return back()->with('error_no_bai_tap','Chưa có bài tập của môn này');
+      return back()->with('error_no_bai_tap','Chưa có bài thi của môn này');
       else {
-        $baitrac = $baitracs->first();
-        $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $baitracs->first()->id)->get();
+        $baitrac = $baitracs->last();
+        $cauhois =  Cauhoi::inRandomOrder()->where('id_baithi', $baitracs->last()->id)->get();
         $duration = $baitrac->duration;
         $student = Student::where('user_id', Auth::user()->id)->get()->first();
-        $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
+        $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->where('lophocphan_id',$id)->get()->first();
         if($thongtinlophocphan->state == 0)
         return abort(404);
         session(['id_thongtin' => $thongtinlophocphan->id ] );
@@ -139,7 +139,7 @@ class BaiTracNgiemController extends Controller
         $baitrac = Baitracnghiem::where('id', $id)->where('diemcua', 0)->get()->first();
         $duration = $baitrac->duration;
         $student = Student::where('user_id', Auth::user()->id)->get()->first();
-        $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
+        $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->where('lophocphan_id',$cauhois->first()->baitracnghiem->lophocphan->id)->get()->first();
         session(['id_thongtin' => $thongtinlophocphan->id ] );
           date_default_timezone_set('Asia/Bangkok');
           $timenow = date("Y-m-d H:i:s");
@@ -186,7 +186,7 @@ class BaiTracNgiemController extends Controller
       if($request->input('isThi') == 1){
           $id = Auth::user()->id;
           $student = Student::where('user_id', $id)->get()->first();
-          $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->get()->first();
+          $thongtinlophocphan = Thongtinlophocphan::where('student_id', $student->id)->where('lophocphan_id',$cauhois->first()->baitracnghiem->lophocphan->id)->get()->first();
           $thongtinlophocphan->diem = ($diem*10)/$count_cauhoi;
           $thongtinlophocphan->state = 0;
           $thongtinlophocphan->end_time = null;

@@ -59,6 +59,7 @@ class ThongTinLopHocPhanController extends Controller
       $data['lophocphan'] = 'class="active"';
       $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
         if(Auth::user()->state == 1){
+          
           return view('thongtinlophocphan.index',['thongtinlophocphans' => $thongtinlophocphans],$data);
         }else if (Auth::user()->state == 3){
           return view('admin.ds_sv',['thongtinlophocphans' => $thongtinlophocphans],$data);

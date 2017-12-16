@@ -3,10 +3,10 @@
   <li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
   <li><a href="{{url('/home/thongtinlophocphans',session('lophoc_id'))}}">Dách sách sinh viên</a></li>
   <li><a href="{{url('/home/baitracnghiem',session('lophoc_id'))}}">Dách sách bài trắc nghiệm</a></li>
-<li class="active">Dách sách câu hỏi</li>
+<li class="active">Dánh sách câu hỏi</li>
 </ol>
 <div class="panel panel-primary" >
-<div class="panel-heading text-left panel-relative"><h2>Dách sách câu hỏi : {{$baitrac->title or 'Title'}}</h2>
+<div class="panel-heading text-left panel-relative"><h2>Dánh sách câu hỏi : {{$baitrac->title or 'Title'}}</h2>
   <button class="btn btn-success" name="btn_modal" id="btn_add_cauhoi"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
 </div>

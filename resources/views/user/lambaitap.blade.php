@@ -31,16 +31,16 @@
         </blockquote>
       <div class="list-group">
     <div class="list-group-item">
-        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio1" value="0"/>a. {{$cauhoi->cautl_a}}</label>
+        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio1" value="0"/> a. {{$cauhoi->cautl_a}}</label>
     </div>
     <div class="list-group-item">
-        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio2" value="1"/>b. {{$cauhoi->cautl_b}}</label>
+        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio2" value="1"/> b. {{$cauhoi->cautl_b}}</label>
     </div>
     <div class="list-group-item">
-        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio3" value="2"/>c. {{$cauhoi->cautl_c}}</label>
+        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio3" value="2"/> c. {{$cauhoi->cautl_c}}</label>
     </div>
     <div class="list-group-item">
-        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio4" value="3"/>d. {{$cauhoi->cautl_d}}</label>
+        <label> <input type="radio" name="radio{{$cauhoi->id}}" id="radio4" value="3"/> d. {{$cauhoi->cautl_d}}</label>
     </div>
       </div>
       <br>
