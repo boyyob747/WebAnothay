@@ -59,7 +59,7 @@ class ThongTinLopHocPhanController extends Controller
       $data['lophocphan'] = 'class="active"';
       $data['ten_lophocphans'] = $thongtinlophocphans->first()->lophocphan->ten_lophocphans;
         if(Auth::user()->state == 1){
-          
+
           return view('thongtinlophocphan.index',['thongtinlophocphans' => $thongtinlophocphans],$data);
         }else if (Auth::user()->state == 3){
           return view('admin.ds_sv',['thongtinlophocphans' => $thongtinlophocphans],$data);
@@ -104,7 +104,12 @@ class ThongTinLopHocPhanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, array (
+        'diem' => 'numeric|max:10'
+    ));
+        $thongtin = Thongtinlophocphan::find($id);
+        $thongtin->diem = $request['diem'];
+        $thongtin->save();
     }
 
     /**

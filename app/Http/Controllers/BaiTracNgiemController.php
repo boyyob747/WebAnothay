@@ -71,17 +71,25 @@ class BaiTracNgiemController extends Controller
       $user_id = Auth::user()->id;
       $id_teacher = Teacher::where('user_id', $user_id)->get()->first()->id;
       $lophocs = Lophocphan::where('teacher_id', $id_teacher)->get();
+      $monhoc_id = Lophocphan::find($id)->monhoc_id;
       $baitracsCuaTeacherArray = array();
       foreach ($lophocs as $lophoc) {
-        $baitracCuaTeachers = Baitracnghiem::where('lophoc_id', $lophoc->id)->get();
-        if(!$baitracCuaTeachers->isEmpty()){
-          foreach ($baitracCuaTeachers as $baitracCuaTeacher) {
-            $baitracsCuaTeacherArray [] = $baitracCuaTeacher ;
+        if ($lophoc->id != $id)
+        {
+          if ($monhoc_id == $lophoc->monhoc->id)
+          {
+            $baitracCuaTeachers = Baitracnghiem::where('lophoc_id', $lophoc->id)->get();
+            if(!$baitracCuaTeachers->isEmpty()){
+              foreach ($baitracCuaTeachers as $baitracCuaTeacher) {
+                $baitracsCuaTeacherArray [] = $baitracCuaTeacher ;
+              }
+            }
           }
         }
       }
       $data['lophocphan'] = 'class="active"';
       $data['lophocphan_id'] = $id;
+      $data['ten_lophocphan'] = Lophocphan::find($id)->ten_lophocphans;
       $data['baitracsCuaTeacherArray'] = $baitracsCuaTeacherArray;
       return view('baitracnghiem.index',['baitracs' => $baitracs],$data);
     }
@@ -217,7 +225,26 @@ class BaiTracNgiemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, array (
+        'lophocphan_id' => 'required',
+        'thoigianthi' => 'required|numeric',
+        'title' => 'required',
+        'diemcua' => 'required'
+      ));
+      $baitrac = BaiTracNghiem::find($id);
+      $baitrac->duration = $request['thoigianthi'];
+      $baitrac->title = $request['title'];
+      $baitrac->diemcua = $request['diemcua'];//lophoc_id
+      $baitrac->lophoc_id = $request['lophocphan_id'];
+      $baitrac->save();
+        $response[] = [
+          'duration' => $baitrac->duration ,
+          'title' =>   $baitrac->title,
+          'diemcua' => $baitrac->diemcua,
+          'lophoc_id' => $baitrac->lophoc_id,
+          'id' => $id
+        ];
+          return response ()->json ( $response);
     }
 
     /**
@@ -228,7 +255,38 @@ class BaiTracNgiemController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $baitrac = Baitracnghiem::find($id);
+        $baitrac->delete();
     }
+    public function CopyBaitrac(Request $request)
+    {
+      $id_baitrac = $request["id_baitrac"];
+      if ($id_baitrac != -1)
+      {
+        $baitracCopy = Baitracnghiem::find($id_baitrac);
+        $baitrac = new Baitracnghiem();
+        $baitrac->duration = $baitracCopy->duration;
+        $baitrac->title = $baitracCopy->title;
+        $baitrac->diemcua = $baitracCopy->diemcua;//lophoc_id
+        $baitrac->lophoc_id = $request["id_lop"];
+        $baitrac->save();
+        $cauhois = Cauhoi::where("id_baithi",$id_baitrac)->get();
+        foreach ($cauhois as $cauhoi) {
+          $cau = new Cauhoi();
+          $cau->cautl_a = $cauhoi->cautl_a;
+          $cau->cautl_b = $cauhoi->cautl_b;
+          $cau->cautl_c = $cauhoi->cautl_c;
+          $cau->cautl_d =  $cauhoi->cautl_d;
+          $cau->cau_hoi = $cauhoi->cau_hoi;
+          $cau->cau_tl = $cauhoi->cau_tl;
+          $cau->id_baithi = $baitrac->id;
+          $cau->save();
+        }
+        return back()->with('success','Đã copy thánh công');
+      }
+      else {
+        return back();
+      }
 
+    }
 }

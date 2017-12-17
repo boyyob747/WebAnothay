@@ -242,4 +242,30 @@ class FileExcelController extends Controller
       })->export('xlsx');
     });
   }
+  public function getExportDiemsSinhviens($id_lop)
+  {
+    $thongtinlophocphans = Thongtinlophocphan::where("lophocphan_id",$id_lop)->get();
+    foreach ($thongtinlophocphans as $thongtinlophocphan) {
+
+      if ($thongtinlophocphan->diem < 0)
+      {
+        $d = "Chưa thi";
+      }
+      else {
+        $d = (string)$thongtinlophocphan->diem;
+      }
+      $sinhvien= ["STT" => $thongtinlophocphan->STT,"Ten" => $thongtinlophocphan->student->user->name,"SoTheSinhVien" => $thongtinlophocphan->student->mssv
+    ,"DienThoai" => $thongtinlophocphan->student->sodienthoai,"LopSinhHoat" => $thongtinlophocphan->student->lop,"NhomThi" => $thongtinlophocphan->nhom_thi,"Diem" => $d];
+      $arrStudents[] = $sinhvien;
+    }
+    //return $arr;
+    date_default_timezone_set('Asia/Bangkok');
+    $timenow = date("Y-m-d H:i:s");
+    $nameFile = "BangKetQuaLop[".$thongtinlophocphans->first()->lophocphan->ten_lophocphans."]Time[".$timenow."]";
+    Excel::create($nameFile,function($excel) use ($arrStudents){
+      $excel->sheet('Sheet 1',function($sheet) use ($arrStudents){
+        $sheet->fromArray($arrStudents);
+      })->export('xlsx');
+    });
+  }
 }

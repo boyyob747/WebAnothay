@@ -11,6 +11,8 @@
   <h2>Danh sách sinhvien của lớp : {{$ten_lophocphans}}</h2>
   <a href="{{url('/home/baitracnghiem',$thongtinlophocphans->first()->lophocphan_id)}}" class="btn btn-success"><i class="fa fa-eye" aria-hidden="true"></i> Danh sách bài trắc nghiệm
   </a>
+  <a href="{{url('/exportdiemsinhviens',$thongtinlophocphans->first()->lophocphan_id)}}" class="btn btn-default"><i class="fa fa-print" aria-hidden="true"></i> Print
+  </a>
   <a href="{{url('/home/setstate/0/'.$thongtinlophocphans->first()->lophocphan_id)}}" style="float: right;" class="btn btn-danger" >Không cho phép tất cả sinh viên vào phòng thi</a>
 
   <a href="{{url('/home/setstate/1/'.$thongtinlophocphans->first()->lophocphan_id)}}" style="float: right;" class="btn btn-info" >Cho phép tất cả sinh viên vào phòng thi</a>

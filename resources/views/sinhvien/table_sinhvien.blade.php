@@ -2,7 +2,7 @@
 <div class="panel panel-primary" >
   <!-- style="min-height: 70%;
   height: 90%;" -->
-<div class="panel-heading text-left panel-relative"><h2>Dánh sách sinh viên</h2>
+<div class="panel-heading text-left panel-relative"><h2>Danh sách sinh viên</h2>
   <button class="btn btn-success" name="btn_modal" id="btn_add_sinhvien"><i class="fa fa-plus" aria-hidden="true"></i></button>
   <div class="btn-group">
   <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

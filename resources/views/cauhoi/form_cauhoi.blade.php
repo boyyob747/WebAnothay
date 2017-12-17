@@ -1,12 +1,12 @@
 <div class="container-fluid">
 <ol class="breadcrumb">
-  <li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
-  <li><a href="{{url('/home/thongtinlophocphans',session('lophoc_id'))}}">Dách sách sinh viên</a></li>
-  <li><a href="{{url('/home/baitracnghiem',session('lophoc_id'))}}">Dách sách bài trắc nghiệm</a></li>
-<li class="active">Dánh sách câu hỏi</li>
+  <li><a href="{{url('/home/lophocphan')}}">Danh sách lớp học phần</a></li>
+  <li><a href="{{url('/home/thongtinlophocphans',session('lophoc_id'))}}">Danh sách sinh viên</a></li>
+  <li><a href="{{url('/home/baitracnghiem',session('lophoc_id'))}}">Danh sách bài trắc nghiệm</a></li>
+<li class="active">Danh sách câu hỏi</li>
 </ol>
 <div class="panel panel-primary" >
-<div class="panel-heading text-left panel-relative"><h2>Dánh sách câu hỏi : {{$baitrac->title or 'Title'}}</h2>
+<div class="panel-heading text-left panel-relative"><h2>Danh sách câu hỏi : {{$baitrac->title or 'Title'}}</h2>
   <button class="btn btn-success" name="btn_modal" id="btn_add_cauhoi"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
 </div>
@@ -53,19 +53,19 @@
           <?php $row = 0; ?>
         @foreach($cauhois as $cauhoi)
         <?php ++$row; ?>
-        <tr class="item" >
+        <tr class="item{{$cauhoi->id}}" >
           <th scope="row">{{$row}}</th>
           <td>{!!$cauhoi->cau_hoi!!}</td>
           <td>{{$cauhoi->cautl_a}}</td>
           <td>{{$cauhoi->cautl_b}}</td>
           <td>{{$cauhoi->cautl_c}}</td>
           <td>{{$cauhoi->cautl_d}}</td>
-          <td><button  class="edit-modal-sinhvien btn btn-info"
-            data-info="{{count($cauhois)}}">
+          <td><button  class="edit-modal-cauhoi btn btn-info"
+            data-info="{{$cauhoi->id}},{{$cauhoi->cau_hoi}},{{$cauhoi->cautl_a}},{{$cauhoi->cautl_b}},{{$cauhoi->cautl_c}},{{$cauhoi->cautl_d}},{{$row}}">
             <span class="glyphicon glyphicon-edit"></span>
         </button></td>
         <td><button class="delete-modal-cauhoi btn btn-danger"
-          data-info="{{count($cauhois)}}">
+          data-info="{{$cauhoi->id}},{{$cauhoi->cau_hoi}},{{$cauhoi->cautl_a}},{{$cauhoi->cautl_b}},{{$cauhoi->cautl_c}},{{$cauhoi->cautl_d}},{{$row}}">
           <span class="glyphicon glyphicon-trash"></span>
       </button></td>
             @endforeach

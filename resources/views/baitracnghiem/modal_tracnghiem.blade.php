@@ -16,6 +16,7 @@
                     <div class="form-group">
                       <span class="hidden" id="save_id"></span>
                       <span class="hidden" id="save_row"></span>
+                      <span class="hidden" id="save_url"></span>
                       <div class="delete_msg">
                       </div>
                       {!! Form::open(['id'  => 'form_create_lophocphan','class' => 'form form-horizontal']) !!}
@@ -51,7 +52,7 @@
                       <br>
                       <center><p>Hoặc chọn bai trac nghiệm đã tạo</p>
                           <br>
-                          {!! Form::open(['method' => 'POST', 'url' => '/importsinhvien','id'  => 'id_form_excel','class' => 'form form-horizontal','enctype'=>'multipart/form-data']) !!}
+                          {!! Form::open(['method' => 'POST', 'url' => '/copybaitrac','id'  => 'id_form_excel','class' => 'form form-horizontal','enctype'=>'multipart/form-data']) !!}
                           <div class="form-group">
                           <?php
                           $baitraccuagiaovien = array();
@@ -62,26 +63,27 @@
                               $i++;
                             }
                             if($i == 0){
-                              $baitraccuagiaovien[0] = 'Chưa có bài đã tạo';
+                              $baitraccuagiaovien[-1] = 'Chưa có bài đã tạo';
                             }
                           }
                           ?>
+                          {{ Form::hidden('id_lop', $lophocphan_id) }}
                           <div class="input-group input-group-lg">
                                   <span class="input-group-addon" id="sizing-addon1">Chọn bài</span>
-                                  {{ Form::select('number', $baitraccuagiaovien, null, ['class' => 'form-control']) }}
+                                  {{ Form::select('id_baitrac', $baitraccuagiaovien, null, ['class' => 'form-control']) }}
                           </div>
                           </div>
                       </center>
                       <br>
                       <div class="text-center">
-                          {!! Form::submit('Upload',['class' => 'btn btn-success']) !!}
+                          {!! Form::submit('Copy',['class' => 'btn btn-success']) !!}
                       </div>
                        {!! Form::close() !!}
                     </div>
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" id="btn_delete_baitrac" data-link="{{ url('/home/student') }}"  data-token="{{ csrf_token() }}" class="btn btn-danger" data-dismiss="modal">Delete
+                    <button type="button" id="btn_delete_baitrac" data-link="{{ url('/home/baitracnghiem') }}"  data-token="{{ csrf_token() }}" class="btn btn-danger" data-dismiss="modal">Delete
                     </button>
                     <button type="button" name="close_form" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>

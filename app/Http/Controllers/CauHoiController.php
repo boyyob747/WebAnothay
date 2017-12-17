@@ -98,7 +98,34 @@ class CauHoiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+      $this->validate($request, array (
+        'cau_hoi' => 'required|string',
+        'cau_tla' => 'required|string',
+        'cau_tlb' => 'required|string',
+        'cau_tlc' => 'required|string',
+        'cau_tld' => 'required|string',
+        'cau_tl' => 'required'
+    ));
+      $cauhoi = Cauhoi::find($id);
+      $cauhoi->cautl_a = $request['cau_tla'];
+      $cauhoi->cautl_b = $request['cau_tlb'];
+      $cauhoi->cautl_c = $request['cau_tlc'];
+      $cauhoi->cautl_d = $request['cau_tld'];
+      $cauhoi->cau_hoi = $request['cau_hoi'];
+      $cauhoi->cau_tl = bcrypt($request['cau_tl']);
+      $cauhoi->id_baithi = $request['id_baithi'];
+      $cauhoi->save();
+      $response[] = [
+        'cau_hoi' => $cauhoi->cau_hoi ,
+        'cau_tla' =>   $cauhoi->cautl_a,
+        'cau_tlb' => $cauhoi->cautl_b,
+        'cau_tlc' => $cauhoi->cautl_c,
+        'cau_tld' => $cauhoi->cautl_d,
+        'cau_tl' => $cauhoi->cau_tl,
+        'id_baithi' => $cauhoi->id_baithi,
+        'id' => $id
+      ];
+        return response ()->json ( $response);
     }
 
     /**
@@ -109,6 +136,7 @@ class CauHoiController extends Controller
      */
     public function destroy($id)
     {
-        //
+          $cauhoi = Cauhoi::find($id);
+          $cauhoi->delete();
     }
 }

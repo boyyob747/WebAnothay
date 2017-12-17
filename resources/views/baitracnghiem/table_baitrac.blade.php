@@ -1,14 +1,14 @@
 <div class="container-fluid">
 <ol class="breadcrumb">
-<li><a href="{{url('/home/lophocphan')}}">Dách sách lớp học phần</a></li>
-<li><a href="{{url('/home/thongtinlophocphans',session('lophoc_id'))}}">Dách sách sinh viên</a></li>
-<li class="active">Dách sách bài trắc nghiệm</li>
+<li><a href="{{url('/home/lophocphan')}}">Danh sách lớp học phần</a></li>
+<li><a href="{{url('/home/thongtinlophocphans',session('lophoc_id'))}}">Danh sách sinh viên</a></li>
+<li class="active">Danh sách bài trắc nghiệm</li>
 </ol>
 <div class="panel panel-primary" >
 
 <div class="panel-heading text-left panel-relative">
 
-  <h2>Dánh sách sinhvien của lớp : </h2>
+  <h2>Danh sách bài trắc nghiệm của lớp : {{$ten_lophocphan}}</h2>
   <button class="btn btn-success" name="btn_modal_tracngiem" id="btn_modal_tracngiem"><i class="fa fa-plus" aria-hidden="true"></i> Tạo bài trắc nghiệm
   </button>
 
@@ -46,6 +46,7 @@
           <th>STT</th>
           <th>Tên bài trắc nghiệm</th>
           <th>Điểm</th>
+          <th>Thời gian</th>
           <th>Xem</th>
           <th>Sửa</th>
           <th>Xóa</th>
@@ -64,14 +65,15 @@
           @elseif($baitrac->diemcua == 1)
           <td>Điểm thi</td>
           @endif
+          <td>{{$baitrac->duration}} phút</td>
           <td><a href="{{ url ('/home/cauhoi',$baitrac->id)}}" class="delete-modal-sinhvien btn btn-warning">
             <span class="glyphicon glyphicon-eye-open"></span></a></td>
-            <td><button class="edit-modal-sinhvien btn btn-info"
-              data-info="">
+            <td><button class="edit-modal-baitrac btn btn-info"
+              data-info="{{$baitrac->id}},{{$row}},{{$baitrac->title}},{{$baitrac->diemcua}},{{$baitrac->duration}},{{url ('/home/cauhoi',$baitrac->id)}}">
               <span class="glyphicon glyphicon-edit"></span>
             </button></td>
-      <td><button class="delete-modal-sinhvien btn btn-danger"
-        data-info="">
+      <td><button class="delete-modal-baitrac btn btn-danger"
+      data-info="{{$baitrac->id}},{{$row}},{{$baitrac->title}},{{$baitrac->diemcua}},{{$baitrac->duration}},{{url ('/home/cauhoi',$baitrac->id)}}">
         <span class="glyphicon glyphicon-trash"></span>
       </button></td>
 

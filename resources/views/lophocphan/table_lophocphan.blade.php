@@ -1,6 +1,6 @@
 <div class="container-fluid">
 <div class="panel panel-primary" >
-<div class="panel-heading text-left panel-relative"><h2>Danh sách lớp học phần của giảng viên {{ $tengiaovien}}</h2>
+<div class="panel-heading text-left panel-relative"><h2>Danh sách lớp học phần của giảng viên : {{ $tengiaovien}}</h2>
 </div>
 
 <div class="panel-body ">

@@ -78,9 +78,9 @@
                 </div>
                 <div class="modal-footer">
 
-                    <button type="button" id="btn_delete_cauhoi" data-link="{{ url('/home/student') }}"  data-token="{{ csrf_token() }}" class="btn btn-danger" data-dismiss="modal">Delete
+                    <button type="button" id="btn_delete_cauhoi" data-link="{{ url('/home/cauhoi') }}"  data-token="{{ csrf_token() }}" class="btn btn-danger" data-dismiss="modal">Delete
                     </button>
-                    <button type="button" name="close_form" class="btn btn-warning" data-dismiss="modal">Close</button>
+                    <button type="button" name="close_form" id="close_form_cauhoi" class="btn btn-warning" data-dismiss="modal">Close</button>
                 </div>
             <!-- </div> -->
         </div>

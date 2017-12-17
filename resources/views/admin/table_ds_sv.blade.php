@@ -1,3 +1,4 @@
+@include('admin.modal_edit_diem')
 <div class="panel-body ">
   <div id="showsuccesbyself">
 
@@ -34,6 +35,7 @@
           <th>Lớp sinh hoạt</th>
           <th>Nhóm thi</th>
           <th>Điểm</th>
+          <th>Sửa</th>
         </tr>
       </thead>
       <tbody id="tb_body_sv">
@@ -50,6 +52,10 @@
           @else
           <td>{{$thongtinlophocphan->diem}}</td>
           @endif
+          <td><button  class="edit-modal-sv btn btn-info"
+            data-info="{{$thongtinlophocphan->id}},{{$thongtinlophocphan->student->user->name}},{{$thongtinlophocphan->diem}}">
+            <span class="glyphicon glyphicon-edit"></span>
+        </button></td>
             @endforeach
           </tbody>
         </table>

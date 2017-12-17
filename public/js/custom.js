@@ -84,6 +84,49 @@ function editTeacherFromServer($id)
             }});
 }
 
+$(document).on('click', '.edit-modal-sv', function() {
+  $('#modalDiem').modal('show');
+  var stuff = $(this).data('info').split(',');
+  $('#save_id').val(stuff[0]);
+  $('#name').val(stuff[1]);
+  $('#diem').val(stuff[2]);
+});
+$(document).on('click', '#btn_update_diem', function() {
+  var id = $("#save_id").val();
+  var diem = $("#diem").val();
+  var url = $(this).attr("data-link");
+  var token = $(this).data('token');
+        $.ajax({
+            method: 'POST',
+            url: url+'/'+id,
+            data: {
+              '_token': token,
+              'id': id,
+              'diem' : diem,
+              '_method' : 'PUT'
+            },
+            success: function(data) {
+                if (data.errors){
+                    alert('error');
+                }
+                 else {
+                   location.reload();
+                 }},error: function (xhr, status, error) {
+                   $('#modalDiem').modal('show');
+                   var err = eval("(" + xhr.responseText + ")");
+                   var msg = ""
+                   var it = ""
+                   var data = jQuery.parseJSON(JSON.stringify(err.errors));
+                     $.each(data, function(key, item)
+                     {
+                         it = "<div class='alert alert-danger alert-dismissable fade in'><a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a><strong>Lỗi : </strong> "+item+"</div>"
+                         msg = msg + it ;
+                       });
+                    $('.div_error').html(msg);
+                     }
+        });
+});
+
 $(document).on('click', '.edit-modal', function() {
         $('#btn_acction').text(" Update");
         $('.modal-title').text('Edit');
@@ -162,7 +205,7 @@ function fillmodalData(details){
                         var table = $('#table_teachers').DataTable();
                          table.page('last').draw('page');
                      }},error: function (xhr, status, error) {
-                       alert(xhr.responseText)
+                       // alert(xhr.responseText)
                        $('#modalAdd').modal('show');
                        var err = eval("(" + xhr.responseText + ")");
                        var msg = ""

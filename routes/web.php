@@ -30,10 +30,12 @@ Route::get('/home/lambaithi/{id}','BaiTracNgiemController@lamBaiThi');
 Route::get('/home/counttime','BaiTracNgiemController@doCountTime');
 Route::post('/home/getketqua','BaiTracNgiemController@getKetQua'); //setStateTest
 Route::post('/home/setStateTest','ThongTinLopHocPhanController@setStateTest');
+Route::post('/copybaitrac','BaiTracNgiemController@CopyBaitrac');
 Route::get('/home/setstate/{state}/{lophocphan_id}','ThongTinLopHocPhanController@setStateTestAll');
 Route::resource('/home/cauhoi','CauHoiController');
 Route::get('/import','FileExcelController@getImport');//getExportTeachers
 Route::post('/importsinhvien','FileExcelController@postImportSinhvien'); //importsinhvienforlophoc getThongTinLopSV
+Route::get('/exportdiemsinhviens/{id_lop}','FileExcelController@getExportDiemsSinhviens');
 Route::get('/getthongtinlopsv','ThongTinLopHocPhanController@getThongTinLopSV');
 Route::post('/importsinhvienforlophoc','FileExcelController@postImportDanhSachSinhvien');
 Route::get('/exportteachers','FileExcelController@getExportTeachers');//getExportSinhviens
