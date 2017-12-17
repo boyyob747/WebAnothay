@@ -4,10 +4,10 @@
 <div class="container-fluid col-md-10 col-md-offset-1">
   <ol class="breadcrumb">
   <li><a href="{{url('/getthongtinlopsv')}}">Lớp học phần</a></li>
-  <li class="active">Dách sách bài tập</li>
+  <li class="active">Danh sách bài tập</li>
   </ol>
   <div class="panel panel-primary">
-  <div class="panel-heading">Dách sách bài tập của môn : {{$baitracs->first()->lophocphan->ten_lophocphans}}</div>
+  <div class="panel-heading">Danh sách bài tập của môn : {{$baitracs->first()->lophocphan->ten_lophocphans}}</div>
   <div class="panel-body">
     @if ($message = Session::get('error_no_bai_tap'))
     <div class="alert alert-danger alert-dismissable fade in">
@@ -21,7 +21,7 @@
           <tr>
             <th>#</th>
             <th>Tên bài tập</th>
-            <th>Luyền tập</th>
+            <th>Luyện tập</th>
           </tr>
         </thead>
         <tbody id="tb_body_sv">
@@ -32,7 +32,7 @@
           <tr class="item">
             <th scope="row"> {{$row}}</th>
             <td>{{$baitrac->title}}</td>
-            <td><a href="{{url('/home/lambai',$baitrac->id)}}" class="btn btn-danger">Click đây để làm bài tập</a></td>
+            <td><a href="{{url('/home/lambai',$baitrac->id)}}" class="btn btn-danger">Bấm vào để làm bài</a></td>
           @endforeach
             </tbody>
           </table>

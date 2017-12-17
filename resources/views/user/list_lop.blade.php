@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid col-md-10 col-md-offset-1">
   <div class="panel panel-primary">
-  <div class="panel-heading">Dách sách lớp học phần của : {{Auth::user()->name}}</div>
+  <div class="panel-heading">Danh sách lớp học phần của : {{Auth::user()->name}}</div>
   <div class="panel-body">
     @if ($message = Session::get('error_no_bai_tap'))
     <div class="alert alert-danger alert-dismissable fade in">
@@ -21,7 +21,7 @@
             <th>Giảng viên</th>
             <th>Nhóm thi</th>
             <th>Điểm</th>
-            <th>Luyền tập</th>
+            <th>Luyện tập</th>
             <th>Làm bài thi</th>
           </tr>
         </thead>
